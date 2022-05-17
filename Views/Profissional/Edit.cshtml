@@ -1,0 +1,91 @@
+﻿@model AdminRestaureVida.Models.Profissional
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editar</h2>
+
+
+@using (Html.BeginForm("EditarProfissional", "Profissional", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <h4>Profissional</h4>
+    <hr />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <form class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-2">
+                    @*@Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })*@
+
+                    <input type="text" class="form-control" name="DataNascimento" id="DataNascimento" value="@Model.DataNascimento.Value.ToShortDateString()" maxlength="10" onkeypress="mascaraData(this)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Celular, htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-5">
+                    @*@Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })*@
+
+                    <input type="text" value="@Model.Celular" name="Celular" id="Celular" class="form-control" maxlength="15" />
+                </div>
+
+                @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-5">
+                    @*@Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })*@
+
+                    <input type="text" value="@Model.Telefone" name="Telefone" id="Telefone" class="form-control" maxlength="15" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.CPF, htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-5">
+                    @*@Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })*@
+
+                    <input type="text" class="form-control" value="@Model.CPF" id="CPF" name="CPF" onkeydown="javascript: fMasc( this, mCPF );">
+                    @*<input type="submit" value="Validar" class="btn btn-default" onclick="ValidaCPF();">*@
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="control-label col-md-1">Segmento</label>
+                <div class="col-md-10">
+                    @*@Html.DropDownListFor(model => model.SegmentoId, (SelectList)ViewBag.Segmentos, "Select Segmento", new { @class = "form-control" })*@
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-offset-1 col-md-10">
+                    <input type="submit" value="Atualizar" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </div>
+    </form>
+}
+
+<a href="/Profissional/Index"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;Voltar</a>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

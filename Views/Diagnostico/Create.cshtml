@@ -1,0 +1,715 @@
+﻿@model AdminRestaureVida.Models.Diagnostico
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm("AdicionarDiagnostico", "Diagnostico", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <h4>Diagnostico</h4>
+    <hr />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <input data-val="true" id="IdCliente" name="IdCliente" type="hidden" value="@ViewBag.Cliente.Id" />
+
+    <form class="row">
+        <div class="col-md-12">
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Respiratorio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Respiratorio, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                    <textarea class="form-control" style="min-width: 100%;" name="Respiratorio" id="Respiratorio" rows="3"></textarea>
+                    @Html.ValidationMessageFor(model => model.Respiratorio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Emocional, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Emocional, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                    <textarea class="form-control" style="min-width: 100%;" name="Emocional" id="Emocional" rows="3"></textarea>
+                    @Html.ValidationMessageFor(model => model.Emocional, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Ortopedico, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Ortopedico, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                    <textarea class="form-control" style="min-width: 100%;" name="Ortopedico" id="Ortopedico" rows="3"></textarea>
+                    @Html.ValidationMessageFor(model => model.Ortopedico, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Digestorio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Digestorio, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                    <textarea class="form-control" style="min-width: 100%;" name="Digestorio" id="Digestorio" rows="3"></textarea>
+                    @Html.ValidationMessageFor(model => model.Digestorio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.MestrualReprodutor, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.MestrualReprodutor, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                    <textarea class="form-control" style="min-width: 100%;" name="MestrualReprodutor" id="MestrualReprodutor" rows="3"></textarea>
+                    @Html.ValidationMessageFor(model => model.MestrualReprodutor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Cardiovascular, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Cardiovascular, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                    <textarea class="form-control" style="min-width: 100%;" name="Cardiovascular" id="Cardiovascular" rows="3"></textarea>
+                    @Html.ValidationMessageFor(model => model.Cardiovascular, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Observacoes, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Observacoes, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                    <textarea class="form-control" style="min-width: 100%;" name="Observacoes" id="Observacoes" rows="3"></textarea>
+                    @Html.ValidationMessageFor(model => model.Observacoes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Tratamentos, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Tratamentos, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                    <textarea class="form-control" style="min-width: 100%;" name="Tratamentos" id="Tratamentos" rows="3"></textarea>
+                    @Html.ValidationMessageFor(model => model.Tratamentos, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.HistoricoDoencaFamiliar, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.HistoricoDoencaFamiliar, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                    <textarea class="form-control" style="min-width: 100%;" name="Tratamentos" id="Tratamentos" rows="3"></textarea>
+                    @Html.ValidationMessageFor(model => model.HistoricoDoencaFamiliar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="panel-group" id="accordionHorario" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingHorario">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionHorario" href="#collapseHorario" aria-expanded="true" aria-controls="collapseHorario">
+                                Horários de Alimentação
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseHorario" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingHorario">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.HorarioCafe, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.HorarioCafe, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                </div>
+
+                                @Html.LabelFor(model => model.HorarioAlmoco, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.HorarioAlmoco, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.HorarioCafeTarde, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.HorarioCafeTarde, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                </div>
+
+                                @Html.LabelFor(model => model.HorarioJantar, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.HorarioJantar, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-group" id="accordionTatoo" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTatoo">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionTatoo" href="#collapseTatoo" aria-expanded="true" aria-controls="collapseTatoo">
+                                Tatoo
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTatoo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTatoo">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.Tatoo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*<div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.Tatoo)
+                                            @Html.ValidationMessageFor(model => model.Tatoo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10">
+                                    <label class="switch">
+                                        <input type="checkbox" id="Tatoo" name="Tatoo" value="true">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.QtdTatoo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.QtdTatoo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QtdTatoo, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.QntTempoTatoo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.QntTempoTatoo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QntTempoTatoo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.RegiaoTatoo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.RegiaoTatoo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.RegiaoTatoo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-group" id="accordionEsporte" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingEsporte">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionEsporte" href="#collapseEsporte" aria-expanded="true" aria-controls="collapseEsporte">
+                                Esporte
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseEsporte" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingEsporte">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.Esporte, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*<div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.Esporte)
+                                            @Html.ValidationMessageFor(model => model.Esporte, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10">
+                                    <label class="switch">
+                                        <input type="checkbox" id="Esporte" name="Esporte" value="true">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.QualEsporte, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.QualEsporte, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QualEsporte, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.ProfissionalEsporte, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*<div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.ProfissionalEsporte)
+                                            @Html.ValidationMessageFor(model => model.ProfissionalEsporte, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10">
+                                    <label class="switch">
+                                        <input type="checkbox" id="ProfissionalEsporte" name="ProfissionalEsporte" value="true">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.FrequenciaEsporte, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.FrequenciaEsporte, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FrequenciaEsporte, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel-group" id="accordionMedicamento" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingMedicamento">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionMedicamento" href="#collapseMedicamento" aria-expanded="true" aria-controls="collapseMedicamento">
+                                Medicamento
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseMedicamento" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingMedicamento">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.Medicamento, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*<div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.Medicamento)
+                                            @Html.ValidationMessageFor(model => model.Medicamento, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10">
+                                    <label class="switch">
+                                        <input type="checkbox" id="Medicamento" name="Medicamento" value="true">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.QtdMedicamento, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.QtdMedicamento, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QtdMedicamento, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.QntTempoMedicamento, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.QntTempoMedicamento, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QntTempoMedicamento, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.NomeRemedio, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.NomeRemedio, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NomeRemedio, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.ObjetivoRemedio, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.ObjetivoRemedio, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ObjetivoRemedio, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-group" id="accordionCirurgia" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingCirurgia">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionCirurgia" href="#collapseCirurgia" aria-expanded="true" aria-controls="collapseCirurgia">
+                                Cirurgia
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseCirurgia" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingCirurgia">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.Cirurgia, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*<div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.Cirurgia)
+                                            @Html.ValidationMessageFor(model => model.Cirurgia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10">
+                                    <label class="switch">
+                                        <input type="checkbox" id="Cirurgia" name="Cirurgia" value="true">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.QtdCirurgia, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.QtdCirurgia, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QtdCirurgia, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.QntTempoCirurgia, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.QntTempoCirurgia, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QntTempoCirurgia, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.RegiaoCirurgia, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.RegiaoCirurgia, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.RegiaoCirurgia, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-group" id="accordionTransplantado" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTransplantado">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionTransplantado" href="#collapseTransplantado" aria-expanded="true" aria-controls="collapseTransplantado">
+                                Transplantado
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTransplantado" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTransplantado">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.Transplantado, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*<div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.Transplantado)
+                                            @Html.ValidationMessageFor(model => model.Transplantado, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10">
+                                    <label class="switch">
+                                        <input type="checkbox" id="Transplantado" name="Transplantado" value="true">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.QntTempoTransplantado, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.QntTempoTransplantado, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QntTempoTransplantado, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.OrgaoTransplantado, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.OrgaoTransplantado, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OrgaoTransplantado, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-group" id="accordionAlergico" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingAlergico">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionAlergico" href="#collapseAlergico" aria-expanded="true" aria-controls="collapseAlergico">
+                                Alergico
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseAlergico" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingAlergico">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.Alergico, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*<div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.Alergico)
+                                            @Html.ValidationMessageFor(model => model.Alergico, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10">
+                                    <label class="switch">
+                                        <input type="checkbox" id="Alergico" name="Alergico" value="true">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.ItemAlergico, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.ItemAlergico, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ItemAlergico, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.ObservacoesAlergicas, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.ObservacoesAlergicas, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ObservacoesAlergicas, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-group" id="accordionBebidaAlcoolica" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingBebidaAlcoolica">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionBebidaAlcoolica" href="#collapseBebidaAlcoolica" aria-expanded="true" aria-controls="collapseBebidaAlcoolica">
+                                BebidaAlcoolica
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseBebidaAlcoolica" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingBebidaAlcoolica">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.BebidaAlcoolica, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*<div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.BebidaAlcoolica)
+                                            @Html.ValidationMessageFor(model => model.BebidaAlcoolica, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10">
+                                    <label class="switch">
+                                        <input type="checkbox" id="BebidaAlcoolica" name="BebidaAlcoolica" value="true">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.NomeBebida, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.NomeBebida, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NomeBebida, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.QntTempoBebida, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.QntTempoBebida, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QntTempoBebida, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.FrequenciaBebida, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.FrequenciaBebida, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FrequenciaBebida, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-group" id="accordionMarcaPasso" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingMarcaPasso">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionMarcaPasso" href="#collapseMarcaPasso" aria-expanded="true" aria-controls="collapseMarcaPasso">
+                                MarcaPasso
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseMarcaPasso" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingMarcaPasso">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.MarcaPasso, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*<div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.MarcaPasso)
+                                            @Html.ValidationMessageFor(model => model.MarcaPasso, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10">
+                                    <label class="switch">
+                                        <input type="checkbox" id="MarcaPasso" name="MarcaPasso" value="true">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.QntTempoMarcaPasso, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.QntTempoMarcaPasso, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QntTempoMarcaPasso, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.ObservacaoMarcaPasso, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.ObservacaoMarcaPasso, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ObservacaoMarcaPasso, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-group" id="accordionProteseSilicone" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingProteseSilicone">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionProteseSilicone" href="#collapseProteseSilicone" aria-expanded="true" aria-controls="collapseProteseSilicone">
+                                ProteseSilicone
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseProteseSilicone" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingProteseSilicone">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.ProteseSilicone, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*<div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.ProteseSilicone)
+                                            @Html.ValidationMessageFor(model => model.ProteseSilicone, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10">
+                                    <label class="switch">
+                                        <input type="checkbox" id="ProteseSilicone" name="ProteseSilicone" value="true">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.QtdProtese, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.QtdProtese, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QtdProtese, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.QntTempoProtese, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.QntTempoProtese, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QntTempoProtese, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.RegiaoProtese, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.RegiaoProtese, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.RegiaoProtese, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-group" id="accordionAnimalEstimacao" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingAnimalEstimacao">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionAnimalEstimacao" href="#collapseAnimalEstimacao" aria-expanded="true" aria-controls="collapseAnimalEstimacao">
+                                Animal de Estimação
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseAnimalEstimacao" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingAnimalEstimacao">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.AnimalEstimacao, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*<div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.AnimalEstimacao)
+                                            @Html.ValidationMessageFor(model => model.AnimalEstimacao, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10">
+                                    <label class="switch">
+                                        <input type="checkbox" id="AnimalEstimacao" name="AnimalEstimacao" value="true">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.QtdAnimalEstimacao, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.QtdAnimalEstimacao, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.QtdAnimalEstimacao, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.Raca, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.Raca, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Raca, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.NomeAnimal, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.NomeAnimal, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NomeAnimal, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.IdadeAnimal, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.IdadeAnimal, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.IdadeAnimal, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.ObservacaoGeral, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.ObservacaoGeral, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                    <textarea class="form-control" style="min-width: 100%;" name="ObservacaoGeral" id="ObservacaoGeral" rows="3"></textarea>
+                    @Html.ValidationMessageFor(model => model.ObservacaoGeral, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+
+        </div>
+    </form>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

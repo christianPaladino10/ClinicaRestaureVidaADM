@@ -1,0 +1,442 @@
+﻿@model AdminRestaureVida.Models.Diagnostico
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Diagnostico</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Respiratorio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Respiratorio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emocional)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emocional)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ortopedico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ortopedico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Digestorio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Digestorio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MestrualReprodutor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MestrualReprodutor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cardiovascular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cardiovascular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacoes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observacoes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tratamentos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tratamentos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorarioCafe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorarioCafe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorarioAlmoco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorarioAlmoco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorarioCafeTarde)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorarioCafeTarde)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorarioJantar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorarioJantar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tatoo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tatoo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QtdTatoo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QtdTatoo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QntTempoTatoo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QntTempoTatoo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegiaoTatoo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegiaoTatoo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Esporte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Esporte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QualEsporte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QualEsporte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfissionalEsporte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfissionalEsporte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrequenciaEsporte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrequenciaEsporte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Medicamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Medicamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QtdMedicamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QtdMedicamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QntTempoMedicamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QntTempoMedicamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeRemedio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeRemedio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ObjetivoRemedio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObjetivoRemedio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cirurgia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cirurgia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QtdCirurgia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QtdCirurgia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QntTempoCirurgia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QntTempoCirurgia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegiaoCirurgia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegiaoCirurgia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transplantado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transplantado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QntTempoTransplantado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QntTempoTransplantado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrgaoTransplantado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrgaoTransplantado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alergico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alergico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemAlergico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemAlergico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ObservacoesAlergicas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObservacoesAlergicas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BebidaAlcoolica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BebidaAlcoolica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeBebida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeBebida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QntTempoBebida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QntTempoBebida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrequenciaBebida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrequenciaBebida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MarcaPasso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MarcaPasso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QntTempoMarcaPasso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QntTempoMarcaPasso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ObservacaoMarcaPasso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObservacaoMarcaPasso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProteseSilicone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProteseSilicone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QtdProtese)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QtdProtese)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QntTempoProtese)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QntTempoProtese)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegiaoProtese)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegiaoProtese)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnimalEstimacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnimalEstimacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QtdAnimalEstimacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QtdAnimalEstimacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Raca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Raca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeAnimal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeAnimal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdadeAnimal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdadeAnimal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HistoricoDoencaFamiliar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HistoricoDoencaFamiliar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ObservacaoGeral)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObservacaoGeral)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
