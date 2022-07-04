@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css" />
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -33,7 +34,8 @@
                     <li>@Html.ActionLink("Diagnóstico", "Index", "Diagnostico")</li>
                     <li>@Html.ActionLink("Profissionais", "Index", "Profissional")</li>
                     <li>@Html.ActionLink("Segmento", "Index", "Segmento")</li>
-                    <li>@Html.ActionLink("Consulta", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Consulta", "Index", "Consulta")</li>
+                    @*<li>@Html.ActionLink("Agenda", "Index", "Agenda")</li>*@
                 </ul>
             </div>
         </div>

@@ -47,14 +47,10 @@ namespace AdminRestaureVida.Controllers
         [HttpPost] //POST: Profissional
         public ActionResult AdicionarProfissional(Profissional profissional)
         {
-            if (ModelState.IsValid) // Vai no Model e verifica os DataAnnotations se são válidos
-            {
-                _repository = new ProfissionalRepository();
+            _repository = new ProfissionalRepository();
 
-                _repository.Adicionar(profissional);
-                return RedirectToAction("Index");
-            }
-            return View(profissional);
+            _repository.Adicionar(profissional);
+            return RedirectToAction("Index");
         }
 
         [HttpGet] //GET (pegar)
@@ -68,11 +64,8 @@ namespace AdminRestaureVida.Controllers
         [HttpPost] //POST (enviar)
         public ActionResult EditarProfissional(Profissional profissional)
         {
-            if (ModelState.IsValid) // Vai no Model e verifica os DataAnnotations se são válidos
-            {
-                _repository = new ProfissionalRepository();
-                _repository.Alterar(profissional);
-            }
+            _repository = new ProfissionalRepository();
+            _repository.Alterar(profissional);
 
             return RedirectToAction("Index"); // redireciona para action apontada
         }

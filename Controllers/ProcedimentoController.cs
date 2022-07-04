@@ -29,14 +29,10 @@ namespace AdminRestaureVida.Controllers
         [HttpPost] //POST: Procedimento
         public ActionResult AdicionarProcedimento(Procedimento procedimento)
         {
-            if (ModelState.IsValid) // Vai no Model e verifica os DataAnnotations se são válidos
-            {
-                _repository = new ProcedimentoRepository();
+            _repository = new ProcedimentoRepository();
 
-                _repository.Adicionar(procedimento);
-                return RedirectToAction("Index");
-            }
-            return View(procedimento);
+            _repository.Adicionar(procedimento);
+            return RedirectToAction("Index");
         }
 
         [HttpGet] //GET (pegar)
@@ -50,11 +46,8 @@ namespace AdminRestaureVida.Controllers
         [HttpPost] //POST (enviar)
         public ActionResult EditarProcedimento(Procedimento procedimento)
         {
-            if (ModelState.IsValid) // Vai no Model e verifica os DataAnnotations se são válidos
-            {
-                _repository = new ProcedimentoRepository();
-                _repository.Alterar(procedimento);
-            }
+            _repository = new ProcedimentoRepository();
+            _repository.Alterar(procedimento);
 
             return RedirectToAction("Index"); // redireciona para action apontada
         }

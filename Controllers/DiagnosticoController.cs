@@ -63,15 +63,10 @@ namespace AdminRestaureVida.Controllers
         [HttpPost] //POST: Diagnostico
         public ActionResult AdicionarDiagnostico(Diagnostico diagnostico)
         {
-            if (ModelState.IsValid) // Vai no Model e verifica os DataAnnotations se são válidos
-            {
-                _repository = new DiagnosticoRepository();
+            _repository = new DiagnosticoRepository();
 
-                _repository.Adicionar(diagnostico);
-                return RedirectToAction("Index");
-            }
-
-            return View(diagnostico);
+            _repository.Adicionar(diagnostico);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Details(int clienteId)

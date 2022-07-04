@@ -1,0 +1,77 @@
+﻿@model AdminRestaureVida.ViewModel.ConsultaViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editar Consulta</h2>
+
+@using (Html.BeginForm("EditarConsulta", "Consulta", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Consulta</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.IdConsulta)
+    @Html.HiddenFor(model => model.IdCliente)
+    @Html.HiddenFor(model => model.IdProfissional)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NomeCliente, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NomeCliente, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.NomeCliente, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DataCriacaoConsulta, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DataCriacaoConsulta, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.DataCriacaoConsulta, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NomeProfissional, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NomeProfissional, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.NomeProfissional, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Observacao, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Observacao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Observacao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Procedimentos usados</div>
+        <div class="panel-body">
+            @for (int i = 0; i < Model.ListaCheckBoxProcedimento.Count; i++)
+            {
+                <label>
+                    @Html.HiddenFor(m => Model.ListaCheckBoxProcedimento[i].Id)
+                    @Html.HiddenFor(m => Model.ListaCheckBoxProcedimento[i].Description)
+                    @Model.ListaCheckBoxProcedimento[i].Description
+                    @Html.CheckBoxFor(m => Model.ListaCheckBoxProcedimento[i].Checked, new { @value = "True" })
+                </label>
+                <br />
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+<br />
+<a href="/Consulta/Historico/@Model.IdCliente"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;Voltar</a>

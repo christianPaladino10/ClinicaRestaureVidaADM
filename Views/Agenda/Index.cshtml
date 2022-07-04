@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div id="calendar"></div>
+<br />
+<div class="action-buttons">
+    <button class="btn btn-primary" id="addBtn">ADD EVENT</button>
+    <button class="btn btn-primary" id="removeBtn">REMOVE EVENT</button>
+</div>
+
+
+@*<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>*@
+<script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
+
+<script>
+    $("#calendar").evoCalendar({
+        'theme': 'Orange Coral'
+    });
+</script>
+

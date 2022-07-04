@@ -29,14 +29,10 @@ namespace AdminRestaureVida.Controllers
         [HttpPost] //POST: Segmento
         public ActionResult AdicionarSegmento(Segmento segmento)
         {
-            if (ModelState.IsValid) // Vai no Model e verifica os DataAnnotations se são válidos
-            {
-                _repository = new SegmentoRepository();
+            _repository = new SegmentoRepository();
 
-                _repository.Adicionar(segmento);
-                return RedirectToAction("Index");
-            }
-            return View(segmento);
+            _repository.Adicionar(segmento);
+            return RedirectToAction("Index");
         }
 
         [HttpGet] //GET (pegar)
@@ -50,11 +46,8 @@ namespace AdminRestaureVida.Controllers
         [HttpPost] //POST (enviar)
         public ActionResult EditarSegmento(Segmento segmento)
         {
-            if (ModelState.IsValid) // Vai no Model e verifica os DataAnnotations se são válidos
-            {
-                _repository = new SegmentoRepository();
-                _repository.Alterar(segmento);
-            }
+            _repository = new SegmentoRepository();
+            _repository.Alterar(segmento);
 
             return RedirectToAction("Index"); // redireciona para action apontada
         }

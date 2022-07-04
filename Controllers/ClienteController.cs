@@ -30,14 +30,10 @@ namespace AdminRestaureVida.Controllers
         [HttpPost] //POST: Cliente
         public ActionResult AdicionarCliente(Cliente cliente)
         {
-            if (ModelState.IsValid) // Vai no Model e verifica os DataAnnotations se são válidos
-            {
-                _repository = new ClienteRepository();
+            _repository = new ClienteRepository();
 
-                _repository.Adicionar(cliente);
-                return RedirectToAction("Index");
-            }
-            return View(cliente);
+            _repository.Adicionar(cliente);
+            return RedirectToAction("Index");
         }
 
 

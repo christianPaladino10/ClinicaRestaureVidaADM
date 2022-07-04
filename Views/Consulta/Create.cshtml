@@ -1,0 +1,59 @@
+﻿@model AdminRestaureVida.ViewModel.ConsultaViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Nova Consulta</h2>
+<hr />
+
+@using (Html.BeginForm("AdicionarConsulta", "Consulta", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" id="IdCliente" name="IdCliente" value="@Url.RequestContext.RouteData.Values["id"]">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Quais procedimentos foram usados?</div>
+        <div class="panel-body">
+            @*@foreach (var item in ViewBag.Procedimentos)
+                {
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="@item.Id" name="@item.Nome" id="@item.Id">
+                            @item.Nome
+                        </label>
+                    </div>
+                }*@
+            @for (int i = 0; i < Model.ListaCheckBoxProcedimento.Count; i++)
+            {
+                <label>
+                    @Html.HiddenFor(m => Model.ListaCheckBoxProcedimento[i].Id)
+                    @Html.HiddenFor(m => Model.ListaCheckBoxProcedimento[i].Description)
+                    @Model.ListaCheckBoxProcedimento[i].Description
+                    @Html.CheckBoxFor(m => Model.ListaCheckBoxProcedimento[i].Checked, new { @value = "True" })
+                </label>
+                <br />
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Observações</div>
+        <div class="panel-body">
+            <textarea class="form-control" style="min-width: 100%;" name="Observacao" id="Observacao" rows="3"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-10">
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+        </div>
+    </div>
+
+}
+
+<br />
+
+<a href="/Consulta/Index"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;Voltar</a>
+
