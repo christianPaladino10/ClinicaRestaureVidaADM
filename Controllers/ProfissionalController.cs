@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static AdminRestaureVida.ViewModel.ProfissionalSegmentoViewModel;
 
 namespace AdminRestaureVida.Controllers
 {
@@ -13,23 +14,50 @@ namespace AdminRestaureVida.Controllers
     {
         private ProfissionalRepository _repository;
         private SegmentoRepository _repositorySegmento;
-
+        private ProfissionalSegmentoRepository _repositoryProfissionalSegmento;
         // GET: Profissional
         public ActionResult Index()
         {
-            _repository = new ProfissionalRepository();
+            if (Session["Autorizado"] != null)
+            {
+                _repository = new ProfissionalRepository();
 
-            var profissionais = _repository.BuscarTodos();
-            return View(profissionais);
+                var profissionais = _repository.BuscarTodos();
+                return View(profissionais);
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         public ActionResult Create()
         {
-            _repositorySegmento = new SegmentoRepository();
-            var segmentos = _repositorySegmento.BuscarTodos();
-            ViewBag.Segmentos = new SelectList(GetSegmentoVM(segmentos), "Id", "Title");
+            if (Session["Autorizado"] != null)
+            {
+                _repositorySegmento = new SegmentoRepository();
+                var segmentos = _repositorySegmento.BuscarTodos();
 
-            return View();
+                ProfissionalSegmentoViewModel vm = new ProfissionalSegmentoViewModel();
+
+                List<CheckBoxSegmento> listaCheckBoxSegmento = new List<CheckBoxSegmento>();
+
+                foreach (var item in segmentos)
+                {
+                    CheckBoxSegmento CheckBoxSegmento = new CheckBoxSegmento
+                    {
+                        Id = item.Id,
+                        Description = item.Nome,
+                        Checked = false
+                    };
+
+                    listaCheckBoxSegmento.Add(CheckBoxSegmento);
+                }
+
+                vm.ListaCheckBoxSegmento = listaCheckBoxSegmento;
+
+                return View(vm);
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         private List<SegmentoViewModel> GetSegmentoVM(List<Segmento> segmentos)
@@ -45,43 +73,181 @@ namespace AdminRestaureVida.Controllers
         }
 
         [HttpPost] //POST: Profissional
-        public ActionResult AdicionarProfissional(Profissional profissional)
+        public ActionResult AdicionarProfissional(ProfissionalSegmentoViewModel profissionalVM)
         {
-            _repository = new ProfissionalRepository();
+            if (Session["Autorizado"] != null)
+            {
+                _repository = new ProfissionalRepository();
+                _repositoryProfissionalSegmento = new ProfissionalSegmentoRepository();
 
-            _repository.Adicionar(profissional);
-            return RedirectToAction("Index");
+                Profissional profissional = new Profissional
+                {
+                    Celular = profissionalVM.Celular,
+                    CPF = profissionalVM.CPF,
+                    DataNascimento = profissionalVM.DataNascimento,
+                    Email = profissionalVM.Email,
+                    Nome = profissionalVM.Nome,
+                    Senha = profissionalVM.Senha,
+                    Telefone = profissionalVM.Telefone
+                };
+
+                int idProfissional = _repository.Adicionar(profissional);
+
+                List<ProfissionalSegmento> listaProfissionalSegmento = new List<ProfissionalSegmento>();
+
+                var lista = profissionalVM.ListaCheckBoxSegmento.Where(x => x.Checked == true);
+
+                foreach (var segmento in lista)
+                {
+                    ProfissionalSegmento ps = new ProfissionalSegmento();
+                    ps.ProfissionalId = idProfissional;
+                    ps.SegmentoId = segmento.Id;
+
+                    listaProfissionalSegmento.Add(ps);
+                }
+
+                _repositoryProfissionalSegmento.Adicionar(listaProfissionalSegmento);
+
+                TempData["MensagemSucesso"] = "Salvo com sucesso!";
+
+                return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         [HttpGet] //GET (pegar)
         public ActionResult Edit(int id)
         {
-            _repository = new ProfissionalRepository();
-            var profissionalEscolhido = _repository.Buscar(id);
-            return View(profissionalEscolhido);
+            if (Session["Autorizado"] != null)
+            {
+                _repository = new ProfissionalRepository();
+                _repositoryProfissionalSegmento = new ProfissionalSegmentoRepository();
+                _repositorySegmento = new SegmentoRepository();
+
+                var profissionalEscolhido = _repository.Buscar(id);
+
+                ProfissionalSegmentoViewModel vm = new ProfissionalSegmentoViewModel();
+                vm.ProfissionalId = id;
+                vm.Celular = profissionalEscolhido.Celular;
+                vm.CPF = profissionalEscolhido.CPF;
+                vm.DataNascimento = profissionalEscolhido.DataNascimento;
+                vm.Email = profissionalEscolhido.Email;
+                vm.Nome = profissionalEscolhido.Nome;
+                vm.Telefone = profissionalEscolhido.Telefone;
+
+                var segmentos = _repositorySegmento.BuscarTodos();
+                var listaProfissionalSegmento = _repositoryProfissionalSegmento.Buscar(id);
+
+                var segmentosEscolhidos = listaProfissionalSegmento.Where(b => segmentos.Any(a => a.Id == b.SegmentoId));
+
+                List<CheckBoxSegmento> listaCheckBoxProfissionalSegmento = new List<CheckBoxSegmento>();
+
+                foreach (var item in segmentos)
+                {
+                    CheckBoxSegmento CheckBoxProfissionalSegmento = new CheckBoxSegmento();
+                    CheckBoxProfissionalSegmento.Id = item.Id;
+                    CheckBoxProfissionalSegmento.Description = item.Nome;
+
+                    if (segmentosEscolhidos.Any(p => p.SegmentoId == item.Id))
+                        CheckBoxProfissionalSegmento.Checked = true;
+                    else
+                        CheckBoxProfissionalSegmento.Checked = false;
+
+                    listaCheckBoxProfissionalSegmento.Add(CheckBoxProfissionalSegmento);
+                }
+
+                vm.ListaCheckBoxSegmento = listaCheckBoxProfissionalSegmento;
+
+                return View(vm);
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         [HttpPost] //POST (enviar)
-        public ActionResult EditarProfissional(Profissional profissional)
+        public ActionResult EditarProfissional(ProfissionalSegmentoViewModel profissionalVM)
         {
-            _repository = new ProfissionalRepository();
-            _repository.Alterar(profissional);
+            if (Session["Autorizado"] != null)
+            {
+                _repository = new ProfissionalRepository();
+                _repositoryProfissionalSegmento = new ProfissionalSegmentoRepository();
 
-            return RedirectToAction("Index"); // redireciona para action apontada
+                Profissional profissional = new Profissional
+                {
+                    Id = profissionalVM.ProfissionalId,
+                    Celular = profissionalVM.Celular,
+                    CPF = profissionalVM.CPF,
+                    DataNascimento = profissionalVM.DataNascimento,
+                    Nome = profissionalVM.Nome,
+                    Telefone = profissionalVM.Telefone
+                };
+
+                _repository.Alterar(profissional);
+
+                var lista = profissionalVM.ListaCheckBoxSegmento.Where(x => x.Checked == true);
+
+                List<ProfissionalSegmento> listaProfissionalSegmento = new List<ProfissionalSegmento>();
+
+                foreach (var segmento in lista)
+                {
+                    ProfissionalSegmento ps = new ProfissionalSegmento();
+                    ps.ProfissionalId = profissional.Id;
+                    ps.SegmentoId = segmento.Id;
+
+                    listaProfissionalSegmento.Add(ps);
+                }
+
+                _repositoryProfissionalSegmento.Deletar(profissional.Id);
+                _repositoryProfissionalSegmento.Adicionar(listaProfissionalSegmento);
+
+                TempData["MensagemSucesso"] = "Salvo com sucesso!";
+
+                return RedirectToAction("Index"); // redireciona para action apontada
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         public ActionResult Delete(int id)
         {
-            _repository = new ProfissionalRepository();
-            _repository.Deletar(id);
-            return RedirectToAction("Index"); // redireciona para action apontada
+            if (Session["Autorizado"] != null)
+            {
+                _repository = new ProfissionalRepository();
+                _repository.Deletar(id);
+                return RedirectToAction("Index"); // redireciona para action apontada
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         public ActionResult Details(int id)
         {
-            _repository = new ProfissionalRepository();
-            var profissionalEscolhido = _repository.Buscar(id);
-            return View(profissionalEscolhido);
+            if (Session["Autorizado"] != null)
+            {
+                _repository = new ProfissionalRepository();
+                _repositorySegmento = new SegmentoRepository();
+                _repositoryProfissionalSegmento = new ProfissionalSegmentoRepository();
+
+                var profissionalEscolhido = _repository.Buscar(id);
+                var segmentos = _repositorySegmento.BuscarTodos();
+                var listaProfissionalSegmento = _repositoryProfissionalSegmento.Buscar(id);
+
+                var segmentosEscolhidos = segmentos.Where(b => listaProfissionalSegmento.Any(a => a.SegmentoId == b.Id));
+
+                List<string> lista = new List<string>();
+
+                foreach (var item in segmentosEscolhidos)
+                {
+                    lista.Add(item.Nome);
+                }
+
+                ViewBag.Segmentos = lista;
+
+                return View(profissionalEscolhido);
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
     }
 }

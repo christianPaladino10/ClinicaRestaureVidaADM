@@ -20,7 +20,8 @@ namespace AdminRestaureVida.Models
 
         [DisplayName("Data Cadastro")]
         public DateTime DataCadastro { get; set; }
-        public int SegmentoId { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
 
     }
 }

@@ -22,8 +22,8 @@ namespace AdminRestaureVida.Repository
         {
             ConectarSql();
 
-            string comando = "INSERT INTO Cliente (Nome,DataNascimento,RG,Idade,CPF,Altura,Peso,Celular,Telefone,EstadoCivil,Profissao,Email,NomeConjuge,NomePai,NomeMae,DataNascimentoMae,DataNascimentoPai,Endereco,Bairro,Cidade,CEP,Estado,Numero,Complemento)" +
-                                   "VALUES(@Nome,@DataNascimento,@RG,@Idade,@CPF,@Altura,@Peso,@Celular,@Telefone,@EstadoCivil,@Profissao,@Email,@NomeConjuge,@NomePai,@NomeMae,@DataNascimentoMae,@DataNascimentoPai,@Endereco,@Bairro,@Cidade,@CEP,@Estado,@Numero,@Complemento)";
+            string comando = "INSERT INTO Cliente (Nome,DataNascimento,RG,Idade,CPF,Altura,Peso,Celular,Telefone,EstadoCivil,Profissao,Email,NomeConjuge,NomePai,NomeMae,DataNascimentoMae,DataNascimentoPai,Endereco,Bairro,Cidade,CEP,Estado,Numero,Complemento, DataCadastro)" +
+                                   "VALUES(@Nome,@DataNascimento,@RG,@Idade,@CPF,@Altura,@Peso,@Celular,@Telefone,@EstadoCivil,@Profissao,@Email,@NomeConjuge,@NomePai,@NomeMae,@DataNascimentoMae,@DataNascimentoPai,@Endereco,@Bairro,@Cidade,@CEP,@Estado,@Numero,@Complemento, @DataCadastro)";
 
             SqlCommand cmd = new SqlCommand(comando, conn);
 
@@ -147,6 +147,8 @@ namespace AdminRestaureVida.Repository
             else
                 cmd.Parameters.Add("@Complemento", SqlDbType.VarChar).Value = cliente.Complemento;
 
+            cmd.Parameters.Add("@DataCadastro", SqlDbType.DateTime).Value = DateTime.Now;
+
             try
             {
                 cmd.ExecuteNonQuery();
@@ -196,6 +198,7 @@ namespace AdminRestaureVida.Repository
                 cliente.Estado = Convert.ToString(reader["Estado"]);
                 cliente.Numero = !string.IsNullOrEmpty(reader["Numero"].ToString()) ? Convert.ToInt32(reader["Numero"]) : 0;
                 cliente.Complemento = Convert.ToString(reader["Complemento"]);
+                cliente.DataCadastro = reader["DataCadastro"] != DBNull.Value ? Convert.ToDateTime(reader["DataCadastro"]) : DateTime.MinValue;
 
                 listaClientes.Add(cliente);
             }
@@ -243,6 +246,7 @@ namespace AdminRestaureVida.Repository
                 cliente.Estado = Convert.ToString(reader["Estado"]);
                 cliente.Numero = !string.IsNullOrEmpty(reader["Numero"].ToString()) ? Convert.ToInt32(reader["Numero"]) : 0;
                 cliente.Complemento = Convert.ToString(reader["Complemento"]);
+                cliente.DataCadastro = reader["DataCadastro"] != DBNull.Value ? Convert.ToDateTime(reader["DataCadastro"]) : DateTime.MinValue;
             };
 
             return cliente;
@@ -269,7 +273,7 @@ namespace AdminRestaureVida.Repository
                 cliente.Idade = !string.IsNullOrEmpty(reader["Idade"].ToString()) ? Convert.ToInt32(reader["Idade"]) : 0;
                 cliente.CPF = Convert.ToString(reader["CPF"]);
                 cliente.Altura = Convert.ToString(reader["Altura"]);
-                cliente.Peso = Convert.ToInt32(reader["Peso"]);
+                cliente.Peso = !string.IsNullOrEmpty(reader["Peso"].ToString()) ? Convert.ToInt32(reader["Peso"]) : 0; ;
                 cliente.Celular = Convert.ToString(reader["Celular"]);
                 cliente.Telefone = Convert.ToString(reader["Telefone"]);
                 cliente.EstadoCivil = Convert.ToString(reader["EstadoCivil"]);
@@ -285,8 +289,9 @@ namespace AdminRestaureVida.Repository
                 cliente.Cidade = Convert.ToString(reader["Cidade"]);
                 cliente.CEP = Convert.ToString(reader["CEP"]);
                 cliente.Estado = Convert.ToString(reader["Estado"]);
-                cliente.Numero = Convert.ToInt32(reader["Numero"]);
+                cliente.Numero = !string.IsNullOrEmpty(reader["Numero"].ToString()) ? Convert.ToInt32(reader["Numero"]) : 0;
                 cliente.Complemento = Convert.ToString(reader["Complemento"]);
+                cliente.DataCadastro = reader["DataCadastro"] != DBNull.Value ? Convert.ToDateTime(reader["DataCadastro"]) : DateTime.MinValue;
 
                 listaClientes.Add(cliente);
             };

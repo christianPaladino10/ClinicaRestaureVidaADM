@@ -22,7 +22,7 @@ namespace AdminRestaureVida.Repository
         {
             ConectarSql();
 
-            string comando = "INSERT INTO ProcedimentoConsulta (ProcedimentoId, ConsultaId) VALUES(@ProcedimentoId, @ConsultaId);";
+            string comando = "INSERT INTO ProcedimentoConsulta (ProcedimentoId, ConsultaId, ClienteId) VALUES(@ProcedimentoId, @ConsultaId, @ClienteId);";
 
             foreach (var item in listaProcedimentoConsulta)
             {
@@ -30,6 +30,7 @@ namespace AdminRestaureVida.Repository
 
                 cmd.Parameters.Add("@ProcedimentoId", SqlDbType.VarChar).Value = item.IdProcedimento;
                 cmd.Parameters.Add("@ConsultaId", SqlDbType.VarChar).Value = item.IdConsulta;
+                cmd.Parameters.Add("@ClienteId", SqlDbType.VarChar).Value = item.IdCliente;
 
                 try
                 {
@@ -78,6 +79,27 @@ namespace AdminRestaureVida.Repository
             SqlCommand cmd = new SqlCommand(comando, conn);
 
             cmd.Parameters.Add("@ConsultaId", SqlDbType.VarChar).Value = idConsulta;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        internal void DeletarPorCliente(int idCliente)
+        {
+            ConectarSql();
+
+            string comando = "DELETE FROM ProcedimentoConsulta " +
+                 "WHERE ClienteId = @idCliente";
+
+            SqlCommand cmd = new SqlCommand(comando, conn);
+
+            cmd.Parameters.Add("@idCliente", SqlDbType.VarChar).Value = idCliente;
 
             try
             {

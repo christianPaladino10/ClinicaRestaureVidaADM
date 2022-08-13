@@ -24,7 +24,7 @@ namespace AdminRestaureVida.Repository
         {
             ConectarSql();
 
-            string comando = "INSERT INTO Consulta (DataCriacao, Observacao, ClienteId, ProfissionalId) VALUES(@DataCriacao, @Observacao, @ClienteId, @ProfissionalId);SELECT SCOPE_IDENTITY();";
+            string comando = "INSERT INTO Consulta (DataCriacao, Observacao, ClienteId, ProfissionalId, Deletado) VALUES(@DataCriacao, @Observacao, @ClienteId, @ProfissionalId, @Deletado);SELECT SCOPE_IDENTITY();";
 
             SqlCommand cmd = new SqlCommand(comando, conn);
 
@@ -35,8 +35,9 @@ namespace AdminRestaureVida.Repository
             else
                 cmd.Parameters.Add("@Observacao", SqlDbType.VarChar).Value = consulta.Observacao;
 
-            cmd.Parameters.Add("@ClienteId", SqlDbType.VarChar).Value = consulta.IdCliente;
-            cmd.Parameters.Add("@ProfissionalId", SqlDbType.VarChar).Value = 3;
+            cmd.Parameters.Add("@ClienteId", SqlDbType.Int).Value = consulta.IdCliente;
+            cmd.Parameters.Add("@ProfissionalId", SqlDbType.Int).Value = consulta.ProfissionalId;
+            cmd.Parameters.Add("@Deletado", SqlDbType.Bit).Value = 0;
 
             try
             {
@@ -102,6 +103,24 @@ namespace AdminRestaureVida.Repository
             };
 
             return consulta;
+        }
+
+        internal void DeletarPorCliente(int idCliente)
+        {
+            ConectarSql();
+            string query = "DELETE FROM Consulta WHERE ClienteId = @idCliente";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.Add("@idCliente", SqlDbType.Int).Value = idCliente;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         internal void Deletar(int id)

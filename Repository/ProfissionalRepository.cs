@@ -23,7 +23,7 @@ namespace AdminRestaureVida.Repository
             List<Profissional> listaProfissionais = new List<Profissional>();
             ConectarSql();
 
-            string comando = "SELECT * FROM Profissional";
+            string comando = "SELECT * FROM Profissional WHERE Deletado = 0";
             SqlCommand cmd = new SqlCommand(comando, conn);
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -34,7 +34,6 @@ namespace AdminRestaureVida.Repository
 
                 profissional.Id = Convert.ToInt32(reader["Id"]);
                 profissional.Nome = Convert.ToString(reader["Nome"]);
-                profissional.SegmentoId = Convert.ToInt32(reader["SegmentoId"]);
 
                 listaProfissionais.Add(profissional);
             }
@@ -42,11 +41,11 @@ namespace AdminRestaureVida.Repository
             return listaProfissionais;
         }
 
-        internal void Adicionar(Profissional profissional)
+        internal int Adicionar(Profissional profissional)
         {
             ConectarSql();
 
-            string comando = "INSERT INTO Profissional (Nome, DataNascimento, CPF, Celular, Telefone, DataCadastro, SegmentoId) VALUES(@Nome, @DataNascimento, @CPF, @Celular, @Telefone, @DataCadastro, @SegmentoId)";
+            string comando = "INSERT INTO Profissional (Nome, DataNascimento, CPF, Celular, Telefone, DataCadastro, Email, Senha) VALUES(@Nome, @DataNascimento, @CPF, @Celular, @Telefone, @DataCadastro, @Email, @Senha);SELECT SCOPE_IDENTITY();";
 
             SqlCommand cmd = new SqlCommand(comando, conn);
 
@@ -75,13 +74,22 @@ namespace AdminRestaureVida.Repository
             else
                 cmd.Parameters.Add("@Telefone", SqlDbType.VarChar).Value = profissional.Telefone;
 
-            cmd.Parameters.Add("@DataCadastro", SqlDbType.VarChar).Value = DateTime.Now;
+            cmd.Parameters.Add("@DataCadastro", SqlDbType.DateTime).Value = DateTime.Now;
 
-            cmd.Parameters.Add("@SegmentoId", SqlDbType.VarChar).Value = profissional.SegmentoId;
+            if (profissional.Email == null)
+                cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = DBNull.Value;
+            else
+                cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = profissional.Email;
+
+            if (profissional.Senha == null)
+                cmd.Parameters.Add("@Senha", SqlDbType.VarChar).Value = DBNull.Value;
+            else
+                cmd.Parameters.Add("@Senha", SqlDbType.VarChar).Value = profissional.Senha;
 
             try
             {
-                cmd.ExecuteNonQuery();
+                int idProfissional = Convert.ToInt32(cmd.ExecuteScalar());
+                return idProfissional;
             }
             catch (Exception ex)
             {
@@ -138,7 +146,7 @@ namespace AdminRestaureVida.Repository
         internal void Deletar(int id)
         {
             ConectarSql();
-            string query = "DELETE FROM Profissional WHERE Id = @Id";
+            string query = "Update Profissional SET Deletado = 1 WHERE Id = @Id";
 
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
@@ -157,7 +165,7 @@ namespace AdminRestaureVida.Repository
         {
             ConectarSql();
 
-            string comando = "SELECT * FROM Profissional WHERE Id = @Id";
+            string comando = "SELECT * FROM Profissional WHERE Id = @Id AND Deletado = 0";
             SqlCommand cmd = new SqlCommand(comando, conn);
 
             cmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
@@ -170,7 +178,32 @@ namespace AdminRestaureVida.Repository
             {
                 profissional.Id = Convert.ToInt32(reader["Id"]);
                 profissional.Nome = Convert.ToString(reader["Nome"]);
-                profissional.SegmentoId = Convert.ToInt32(reader["SegmentoId"]);
+                profissional.DataNascimento = reader["DataNascimento"] != DBNull.Value ? Convert.ToDateTime(reader["DataNascimento"]) : DateTime.MinValue;
+                profissional.CPF = Convert.ToString(reader["CPF"]);
+                profissional.Celular = Convert.ToString(reader["Celular"]);
+                profissional.Telefone = Convert.ToString(reader["Telefone"]);
+                profissional.DataCadastro = reader["DataCadastro"] != DBNull.Value ? Convert.ToDateTime(reader["DataCadastro"]) : DateTime.MinValue;
+            }
+
+            return profissional;
+        }
+
+        public Profissional Login(Profissional profissional)
+        {
+            ConectarSql();
+
+            string comando = "SELECT * FROM Profissional WHERE Email = @Email and Senha = @Senha AND Deletado = 0";
+            SqlCommand cmd = new SqlCommand(comando, conn);
+
+            cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = profissional.Email;
+            cmd.Parameters.Add("@Senha", SqlDbType.VarChar).Value = profissional.Senha;
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                profissional.Id = Convert.ToInt32(reader["Id"]);
+                profissional.Nome = Convert.ToString(reader["Nome"]);
                 profissional.DataNascimento = reader["DataNascimento"] != DBNull.Value ? Convert.ToDateTime(reader["DataNascimento"]) : DateTime.MinValue;
                 profissional.CPF = Convert.ToString(reader["CPF"]);
                 profissional.Celular = Convert.ToString(reader["Celular"]);
@@ -179,5 +212,6 @@ namespace AdminRestaureVida.Repository
 
             return profissional;
         }
+
     }
 }

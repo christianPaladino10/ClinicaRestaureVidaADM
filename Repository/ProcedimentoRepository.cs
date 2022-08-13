@@ -84,9 +84,9 @@ namespace AdminRestaureVida.Repository
             {
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -102,9 +102,9 @@ namespace AdminRestaureVida.Repository
             {
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

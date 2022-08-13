@@ -279,11 +279,29 @@ namespace AdminRestaureVida.Repository
             }
         }
 
+        internal void DeletarPorCliente(int idCliente)
+        {
+            ConectarSql();
+            string query = "DELETE FROM Diagnostico WHERE ClienteId = @idCliente";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.Add("@idCliente", SqlDbType.Int).Value = idCliente;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         internal void Alterar(Diagnostico diagnostico)
         {
             ConectarSql();
 
-            string comando = "UPDATE Diagnostico SET Respiratorio = @Respiratorio,	Emocional = @Emocional,	Ortopedico = @Ortopedico,	Digestorio = @Digestorio,	MestrualReprodutor = @MestrualReprodutor,	Cardiovascular = @Cardiovascular,	Observacoes = @Observacoes,	Tratamentos = @Tratamentos,	HorarioCafe	= @HorarioCafe, HorarioAlmoco = @HorarioAlmoco,	HorarioCafeTarde = @HorarioCafeTarde,	HorarioJantar = @HorarioJantar,	Tatoo = @Tatoo,	QtdTatoo = @QtdTatoo,	QntTempoTatoo = @QntTempoTatoo,	RegiaoTatoo = @RegiaoTatoo,	Esporte	= @RegiaoTatoo, QualEsporte = @QualEsporte,	ProfissionalEsporte = @ProfissionalEsporte,	FrequenciaEsporte = @FrequenciaEsporte,	Medicamento = @Medicamento,	QtdMedicamento = @QtdMedicamento,	QntTempoMedicamento = @QntTempoMedicamento,	NomeRemedio = @NomeRemedio,	ObjetivoRemedio = @ObjetivoRemedio,	QtdCirurgia = @QtdCirurgia,	QntTempoCirurgia = @QntTempoCirurgia,	RegiaoCirurgia = @RegiaoCirurgia,	Transplantado = @Transplantado,	QntTempoTransplantado = @QntTempoTransplantado,	OrgaoTransplantado = @OrgaoTransplantado,	Alergico = @Alergico,	ItemAlergico = @ItemAlergico,	ObservacoesAlergicas = @ObservacoesAlergicas,	BebidaAlcoolica = @BebidaAlcoolica,	NomeBebida = @NomeBebida,	QntTempoBebida = @QntTempoBebida,	FrequenciaBebida = @FrequenciaBebida,	MarcaPasso = @MarcaPasso,	QntTempoMarcaPasso = @QntTempoMarcaPasso,	ObservacaoMarcaPasso = @ObservacaoMarcaPasso,	ProteseSilicone = @ProteseSilicone,	QtdProtese = @QtdProtese,	QntTempoProtese = @QntTempoProtese,	RegiaoProtese = @RegiaoProtese,	AnimalEstimacao = @AnimalEstimacao,	QtdAnimalEstimacao = @QtdAnimalEstimacao,	Raca = @Raca,	NomeAnimal = @NomeAnimal,	IdadeAnimal = @IdadeAnimal,	HistoricoDoencaFamiliar = @HistoricoDoencaFamiliar,	ObservacaoGeral = @ObservacaoGeral,	 ProfissionalId = @ProfissionalId,	Cirurgia = @Cirurgia " +
+            string comando = "UPDATE Diagnostico SET Respiratorio = @Respiratorio,	Emocional = @Emocional,	Ortopedico = @Ortopedico,	Digestorio = @Digestorio,	MestrualReprodutor = @MestrualReprodutor,	Cardiovascular = @Cardiovascular,	Observacoes = @Observacoes,	Tratamentos = @Tratamentos,	HorarioCafe	= @HorarioCafe, HorarioAlmoco = @HorarioAlmoco,	HorarioCafeTarde = @HorarioCafeTarde,	HorarioJantar = @HorarioJantar,	Tatoo = @Tatoo,	QtdTatoo = @QtdTatoo,	QntTempoTatoo = @QntTempoTatoo,	RegiaoTatoo = @RegiaoTatoo,	Esporte	= @Esporte, QualEsporte = @QualEsporte,	ProfissionalEsporte = @ProfissionalEsporte,	FrequenciaEsporte = @FrequenciaEsporte,	Medicamento = @Medicamento,	QtdMedicamento = @QtdMedicamento,	QntTempoMedicamento = @QntTempoMedicamento,	NomeRemedio = @NomeRemedio,	ObjetivoRemedio = @ObjetivoRemedio,	QtdCirurgia = @QtdCirurgia,	QntTempoCirurgia = @QntTempoCirurgia,	RegiaoCirurgia = @RegiaoCirurgia,	Transplantado = @Transplantado,	QntTempoTransplantado = @QntTempoTransplantado,	OrgaoTransplantado = @OrgaoTransplantado,	Alergico = @Alergico,	ItemAlergico = @ItemAlergico,	ObservacoesAlergicas = @ObservacoesAlergicas,	BebidaAlcoolica = @BebidaAlcoolica,	NomeBebida = @NomeBebida,	QntTempoBebida = @QntTempoBebida,	FrequenciaBebida = @FrequenciaBebida,	MarcaPasso = @MarcaPasso,	QntTempoMarcaPasso = @QntTempoMarcaPasso,	ObservacaoMarcaPasso = @ObservacaoMarcaPasso,	ProteseSilicone = @ProteseSilicone,	QtdProtese = @QtdProtese,	QntTempoProtese = @QntTempoProtese,	RegiaoProtese = @RegiaoProtese,	AnimalEstimacao = @AnimalEstimacao,	QtdAnimalEstimacao = @QtdAnimalEstimacao,	Raca = @Raca,	NomeAnimal = @NomeAnimal,	IdadeAnimal = @IdadeAnimal,	HistoricoDoencaFamiliar = @HistoricoDoencaFamiliar,	ObservacaoGeral = @ObservacaoGeral,	 ProfissionalId = @ProfissionalId,	Cirurgia = @Cirurgia, DataAtualizacao = @DataAtualizacao " +
                                  "WHERE Id = @Id";
 
             SqlCommand cmd = new SqlCommand(comando, conn);

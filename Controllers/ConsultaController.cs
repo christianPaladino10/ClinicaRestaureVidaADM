@@ -20,193 +20,240 @@ namespace AdminRestaureVida.Controllers
         // GET: Consulta
         public ActionResult Index()
         {
-            return View();
+            if (Session["Autorizado"] != null)
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         public ActionResult Create()
         {
-            _procedimentoRepository = new ProcedimentoRepository();
-            var procedimentos = _procedimentoRepository.BuscarTodos();
-
-            ConsultaViewModel vm = new ConsultaViewModel();
-
-            List<CheckBoxProcedimento> listaCheckBoxProcedimentos = new List<CheckBoxProcedimento>();
-
-            foreach (var item in procedimentos)
+            if (Session["Autorizado"] != null)
             {
-                CheckBoxProcedimento CheckBoxProcedimentos = new CheckBoxProcedimento
+                _procedimentoRepository = new ProcedimentoRepository();
+                var procedimentos = _procedimentoRepository.BuscarTodos();
+
+                ConsultaViewModel vm = new ConsultaViewModel();
+
+                List<CheckBoxProcedimento> listaCheckBoxProcedimentos = new List<CheckBoxProcedimento>();
+
+                foreach (var item in procedimentos)
                 {
-                    Id = item.Id,
-                    Description = item.Nome,
-                    Checked = false
-                };
+                    CheckBoxProcedimento CheckBoxProcedimentos = new CheckBoxProcedimento
+                    {
+                        Id = item.Id,
+                        Description = item.Nome,
+                        Checked = false
+                    };
 
-                listaCheckBoxProcedimentos.Add(CheckBoxProcedimentos);
+                    listaCheckBoxProcedimentos.Add(CheckBoxProcedimentos);
+                }
+
+                vm.ListaCheckBoxProcedimento = listaCheckBoxProcedimentos;
+
+                return View(vm);
             }
-
-            vm.ListaCheckBoxProcedimento = listaCheckBoxProcedimentos;
-
-            return View(vm);
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            _repository = new ConsultaRepository();
-            _clienteRepository = new ClienteRepository();
-            _profissionalRepository = new ProfissionalRepository();
-            _procedimentoConsultaRepository = new ProcedimentoConsultaRepository();
-            _procedimentoRepository = new ProcedimentoRepository();
-
-            var consulta = _repository.Buscar(id);
-            var cliente = _clienteRepository.Buscar(consulta.IdCliente);
-            var profissional = _profissionalRepository.Buscar(consulta.ProfissionalId);
-            var procedimentoConsulta = _procedimentoConsultaRepository.Buscar(consulta.Id);
-
-            ConsultaViewModel vm = new ConsultaViewModel();
-            vm.DataCriacaoConsulta = consulta.DataCriacao;
-            vm.NomeCliente = cliente.Nome;
-            vm.NomeProfissional = profissional.Nome;
-            vm.Observacao = consulta.Observacao;
-            vm.IdCliente = cliente.Id;
-            vm.IdProfissional = profissional.Id;
-            vm.IdConsulta = id;
-
-            var procedimentos = _procedimentoRepository.BuscarTodos();
-            var procedimentosEscolhidos = procedimentoConsulta.Where(b => procedimentos.Any(a => a.Id == b.IdProcedimento));
-
-            List<CheckBoxProcedimento> listaCheckBoxProcedimentos = new List<CheckBoxProcedimento>();
-
-            foreach (var item in procedimentos)
+            if (Session["Autorizado"] != null)
             {
-                CheckBoxProcedimento CheckBoxProcedimentos = new CheckBoxProcedimento();
-                CheckBoxProcedimentos.Id = item.Id;
-                CheckBoxProcedimentos.Description = item.Nome;
+                _repository = new ConsultaRepository();
+                _clienteRepository = new ClienteRepository();
+                _profissionalRepository = new ProfissionalRepository();
+                _procedimentoConsultaRepository = new ProcedimentoConsultaRepository();
+                _procedimentoRepository = new ProcedimentoRepository();
 
-                if (procedimentosEscolhidos.Any(p => p.IdProcedimento == item.Id))
-                    CheckBoxProcedimentos.Checked = true;
-                else
-                    CheckBoxProcedimentos.Checked = false;
+                var consulta = _repository.Buscar(id);
+                var cliente = _clienteRepository.Buscar(consulta.IdCliente);
+                var profissional = _profissionalRepository.Buscar(consulta.ProfissionalId);
+                var procedimentoConsulta = _procedimentoConsultaRepository.Buscar(consulta.Id);
 
-                listaCheckBoxProcedimentos.Add(CheckBoxProcedimentos);
+                ConsultaViewModel vm = new ConsultaViewModel();
+                vm.DataCriacaoConsulta = consulta.DataCriacao;
+                vm.NomeCliente = cliente.Nome;
+                vm.NomeProfissional = profissional.Nome;
+                vm.Observacao = consulta.Observacao;
+                vm.IdCliente = cliente.Id;
+                vm.IdProfissional = profissional.Id;
+                vm.IdConsulta = id;
+
+                var procedimentos = _procedimentoRepository.BuscarTodos();
+                var procedimentosEscolhidos = procedimentoConsulta.Where(b => procedimentos.Any(a => a.Id == b.IdProcedimento));
+
+                List<CheckBoxProcedimento> listaCheckBoxProcedimentos = new List<CheckBoxProcedimento>();
+
+                foreach (var item in procedimentos)
+                {
+                    CheckBoxProcedimento CheckBoxProcedimentos = new CheckBoxProcedimento();
+                    CheckBoxProcedimentos.Id = item.Id;
+                    CheckBoxProcedimentos.Description = item.Nome;
+
+                    if (procedimentosEscolhidos.Any(p => p.IdProcedimento == item.Id))
+                        CheckBoxProcedimentos.Checked = true;
+                    else
+                        CheckBoxProcedimentos.Checked = false;
+
+                    listaCheckBoxProcedimentos.Add(CheckBoxProcedimentos);
+                }
+
+                vm.ListaCheckBoxProcedimento = listaCheckBoxProcedimentos;
+
+                return View(vm);
             }
-
-            vm.ListaCheckBoxProcedimento = listaCheckBoxProcedimentos;
-
-            return View(vm);
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         [HttpPost] //POST (enviar)
         public ActionResult EditarConsulta(ConsultaViewModel consultaVm)
         {
-            _repository = new ConsultaRepository();
-
-            Consulta consulta = new Consulta
+            if (Session["Autorizado"] != null)
             {
-                Id = consultaVm.IdConsulta,
-                IdCliente = consultaVm.IdCliente,
-                Observacao = consultaVm.Observacao
-            };
+                _repository = new ConsultaRepository();
 
-            _repository.Alterar(consulta);
+                Consulta consulta = new Consulta
+                {
+                    Id = consultaVm.IdConsulta,
+                    IdCliente = consultaVm.IdCliente,
+                    Observacao = consultaVm.Observacao
+                };
 
-            var lista = consultaVm.ListaCheckBoxProcedimento.Where(x => x.Checked == true);
+                _repository.Alterar(consulta);
 
-            List<ProcedimentoConsulta> listaProcedimentoConsulta = new List<ProcedimentoConsulta>();
+                var lista = consultaVm.ListaCheckBoxProcedimento.Where(x => x.Checked == true);
 
-            foreach (var procedimento in lista)
-            {
-                ProcedimentoConsulta pc = new ProcedimentoConsulta();
-                pc.IdProcedimento = procedimento.Id;
-                pc.IdConsulta = consultaVm.IdConsulta;
+                List<ProcedimentoConsulta> listaProcedimentoConsulta = new List<ProcedimentoConsulta>();
 
-                listaProcedimentoConsulta.Add(pc);
+                foreach (var procedimento in lista)
+                {
+                    ProcedimentoConsulta pc = new ProcedimentoConsulta();
+                    pc.IdProcedimento = procedimento.Id;
+                    pc.IdConsulta = consultaVm.IdConsulta;
+                    pc.IdCliente = consulta.IdCliente;
+
+                    listaProcedimentoConsulta.Add(pc);
+                }
+
+                _procedimentoConsultaRepository = new ProcedimentoConsultaRepository();
+                _procedimentoConsultaRepository.Deletar(consulta.Id);
+                _procedimentoConsultaRepository.Adicionar(listaProcedimentoConsulta);
+
+                TempData["MensagemSucesso"] = "Salvo com sucesso!";
+
+                return Redirect("/Consulta/Historico/" + consulta.IdCliente);
             }
-
-            _procedimentoConsultaRepository = new ProcedimentoConsultaRepository();
-            _procedimentoConsultaRepository.Deletar(consulta.Id);
-            _procedimentoConsultaRepository.Adicionar(listaProcedimentoConsulta);
-
-
-            return Redirect("/Consulta/Historico/" + consulta.IdCliente);
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         public ActionResult Delete(int id)
         {
-            _repository = new ConsultaRepository();
-            _repository.Deletar(id);
-            //return RedirectToAction("Historico");
+            if (Session["Autorizado"] != null)
+            {
+                _repository = new ConsultaRepository();
+                _repository.Deletar(id);
+                //return RedirectToAction("Historico");
 
-            var consulta = _repository.Buscar(id);
-            return Redirect("/Consulta/Historico/" + consulta.IdCliente);
+                var consulta = _repository.Buscar(id);
+                return Redirect("/Consulta/Historico/" + consulta.IdCliente);
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         public ActionResult Historico()
         {
-            _repository = new ConsultaRepository();
+            if (Session["Autorizado"] != null)
+            {
+                _repository = new ConsultaRepository();
 
-            var idCliente = Url.RequestContext.RouteData.Values["id"];
-            var listaConsulta = _repository.GetConsultasPorCliente(Convert.ToInt32(idCliente));
+                var idCliente = Url.RequestContext.RouteData.Values["id"];
+                var listaConsulta = _repository.GetConsultasPorCliente(Convert.ToInt32(idCliente));
 
-            return View(listaConsulta);
+                return View(listaConsulta);
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         public ActionResult BuscarCliente(string nome)
         {
-            if (!string.IsNullOrEmpty(nome))
+            if (Session["Autorizado"] != null)
             {
-                _clienteRepository = new ClienteRepository();
-
-                var clientes = _clienteRepository.BuscarPorNome(nome);
-
-                List<ClienteDiagnosticoViewModel> listVM = new List<ClienteDiagnosticoViewModel>();
-
-                foreach (var cliente in clientes)
+                if (!string.IsNullOrEmpty(nome))
                 {
-                    ClienteDiagnosticoViewModel vm = new ClienteDiagnosticoViewModel();
-                    vm.IdCliente = cliente.Id;
-                    vm.Nome = cliente.Nome;
-                    vm.TemDiagnostico = false;
+                    _clienteRepository = new ClienteRepository();
 
-                    listVM.Add(vm);
+                    var clientes = _clienteRepository.BuscarPorNome(nome);
+
+                    List<ClienteDiagnosticoViewModel> listVM = new List<ClienteDiagnosticoViewModel>();
+
+                    foreach (var cliente in clientes)
+                    {
+                        ClienteDiagnosticoViewModel vm = new ClienteDiagnosticoViewModel();
+                        vm.IdCliente = cliente.Id;
+                        vm.Nome = cliente.Nome;
+                        vm.TemDiagnostico = false;
+
+                        listVM.Add(vm);
+                    }
+
+                    ViewBag.Clientes = listVM;
                 }
 
-                ViewBag.Clientes = listVM;
+                return View("Index");
             }
-
-            return View("Index");
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         [HttpPost] //POST: Consulta
         public ActionResult AdicionarConsulta(ConsultaViewModel consultaVm)
         {
-            _repository = new ConsultaRepository();
-            _procedimentoConsultaRepository = new ProcedimentoConsultaRepository();
-
-            Consulta consulta = new Consulta
+            if (Session["Autorizado"] != null)
             {
-                IdCliente = consultaVm.IdCliente,
-                Observacao = consultaVm.Observacao
-            };
+                _repository = new ConsultaRepository();
+                _procedimentoConsultaRepository = new ProcedimentoConsultaRepository();
 
-            int idConsulta = _repository.Adicionar(consulta);
+                Consulta consulta = new Consulta
+                {
+                    IdCliente = consultaVm.IdCliente,
+                    Observacao = consultaVm.Observacao
+                };
 
-            List<ProcedimentoConsulta> listaProcedimentoConsulta = new List<ProcedimentoConsulta>();
+                consulta.ProfissionalId = Convert.ToInt32(Session["Autorizado"]);
 
-            var lista = consultaVm.ListaCheckBoxProcedimento.Where(x => x.Checked == true);
+                int idConsulta = _repository.Adicionar(consulta);
 
-            foreach (var procedimento in lista)
-            {
-                ProcedimentoConsulta pc = new ProcedimentoConsulta();
-                pc.IdProcedimento = procedimento.Id;
-                pc.IdConsulta = idConsulta;
+                List<ProcedimentoConsulta> listaProcedimentoConsulta = new List<ProcedimentoConsulta>();
 
-                listaProcedimentoConsulta.Add(pc);
+                var lista = consultaVm.ListaCheckBoxProcedimento.Where(x => x.Checked == true);
+
+                foreach (var procedimento in lista)
+                {
+                    ProcedimentoConsulta pc = new ProcedimentoConsulta();
+                    pc.IdProcedimento = procedimento.Id;
+                    pc.IdConsulta = idConsulta;
+                    pc.IdCliente = consulta.IdCliente;
+
+                    listaProcedimentoConsulta.Add(pc);
+                }
+
+                _procedimentoConsultaRepository.Adicionar(listaProcedimentoConsulta);
+
+                TempData["MensagemSucesso"] = "Salvo com sucesso!";
+
+                return RedirectToAction("Index");
             }
-
-            _procedimentoConsultaRepository.Adicionar(listaProcedimentoConsulta);
-
-            return RedirectToAction("Index");
+            else
+                return RedirectToAction("Index", "Login");
         }
 
     }

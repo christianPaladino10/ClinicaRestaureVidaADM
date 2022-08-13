@@ -9,5 +9,6 @@ namespace AdminRestaureVida.Models
     {
         public int IdProcedimento { get; set; }
         public int IdConsulta { get; set; }
+        public int IdCliente { get; set; }
     }
 }

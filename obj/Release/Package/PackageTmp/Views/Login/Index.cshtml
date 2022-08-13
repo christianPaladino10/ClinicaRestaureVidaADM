@@ -1,0 +1,35 @@
+﻿<div class="text-center">
+    <h2>LOGIN</h2>
+</div>
+
+<form action="/Login/Login" method="post">
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4 text-left">
+            <label for="email" class="form-label"><b>Login</b></label>
+            <input type="email" class="form-control" placeholder="nome@ex.com" id="email" name="email" required>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4 text-left">
+            <label for="senha" class="form-label"><b>Senha</b></label>
+            <input type="password" class="form-control" id="senha" name="senha" required>
+            <span><a href="#">Esqueci a senha</a></span>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4 text-left">
+            <div class="button">
+                <button class="btn btn-primary" type="submit">Entrar</button>
+            </div>
+            <br />
+            <span style="color:red"> @ViewBag.Erro</span>
+        </div>
+    </div>
+    <br />
+</form>
+
+

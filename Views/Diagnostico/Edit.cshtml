@@ -19,6 +19,7 @@
     <form class="row">
         <div class="col-md-12">
             @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.IdCliente)
 
             <div class="form-group row">
                 @Html.LabelFor(model => model.Respiratorio, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -124,24 +125,24 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.HorarioCafe, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.HorarioCafe, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                    @Html.EditorFor(model => model.HorarioCafe, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
                                 </div>
 
                                 @Html.LabelFor(model => model.HorarioAlmoco, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.HorarioAlmoco, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                    @Html.EditorFor(model => model.HorarioAlmoco, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.HorarioCafeTarde, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.HorarioCafeTarde, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                    @Html.EditorFor(model => model.HorarioCafeTarde, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
                                 </div>
 
                                 @Html.LabelFor(model => model.HorarioJantar, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.HorarioJantar, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                    @Html.EditorFor(model => model.HorarioJantar, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
                                 </div>
                             </div>
                         </div>
@@ -163,11 +164,11 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.Tatoo, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @*<div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.Tatoo)
-                                            @Html.ValidationMessageFor(model => model.Tatoo, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Tatoo)
+                                    @Html.ValidationMessageFor(model => model.Tatoo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                                 <div class="col-md-10">
                                     <label class="switch">
                                         @if (Model.Tatoo)
@@ -224,11 +225,11 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.Esporte, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @*<div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.Esporte)
-                                            @Html.ValidationMessageFor(model => model.Esporte, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Esporte)
+                                    @Html.ValidationMessageFor(model => model.Esporte, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                                 <div class="col-md-10">
                                     <label class="switch">
                                         @if (Model.Esporte)
@@ -254,11 +255,11 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.ProfissionalEsporte, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @*<div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.ProfissionalEsporte)
-                                            @Html.ValidationMessageFor(model => model.ProfissionalEsporte, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.ProfissionalEsporte)
+                                    @Html.ValidationMessageFor(model => model.ProfissionalEsporte, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                                 <div class="col-md-10">
                                     <label class="switch">
                                         @if (Model.ProfissionalEsporte)
@@ -302,11 +303,11 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.Medicamento, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @*<div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.Medicamento)
-                                            @Html.ValidationMessageFor(model => model.Medicamento, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Medicamento)
+                                    @Html.ValidationMessageFor(model => model.Medicamento, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                                 <div class="col-md-10">
                                     <label class="switch">
                                         @if (Model.Medicamento)
@@ -371,11 +372,11 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.Cirurgia, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @*<div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.Cirurgia)
-                                            @Html.ValidationMessageFor(model => model.Cirurgia, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Cirurgia)
+                                    @Html.ValidationMessageFor(model => model.Cirurgia, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                                 <div class="col-md-10">
                                     <label class="switch">
                                         @if (Model.Cirurgia)
@@ -432,11 +433,11 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.Transplantado, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @*<div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.Transplantado)
-                                            @Html.ValidationMessageFor(model => model.Transplantado, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Transplantado)
+                                    @Html.ValidationMessageFor(model => model.Transplantado, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                                 <div class="col-md-10">
                                     <label class="switch">
                                         @if (Model.Transplantado)
@@ -486,11 +487,11 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.Alergico, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @*<div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.Alergico)
-                                            @Html.ValidationMessageFor(model => model.Alergico, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Alergico)
+                                    @Html.ValidationMessageFor(model => model.Alergico, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                                 <div class="col-md-10">
                                     <label class="switch">
                                         @if (Model.Alergico)
@@ -541,11 +542,11 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.BebidaAlcoolica, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @*<div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.BebidaAlcoolica)
-                                            @Html.ValidationMessageFor(model => model.BebidaAlcoolica, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.BebidaAlcoolica)
+                                    @Html.ValidationMessageFor(model => model.BebidaAlcoolica, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                                 <div class="col-md-10">
                                     <label class="switch">
                                         @if (Model.BebidaAlcoolica)
@@ -603,11 +604,11 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.MarcaPasso, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @*<div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.MarcaPasso)
-                                            @Html.ValidationMessageFor(model => model.MarcaPasso, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.MarcaPasso)
+                                    @Html.ValidationMessageFor(model => model.MarcaPasso, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                                 <div class="col-md-10">
                                     <label class="switch">
                                         @if (Model.MarcaPasso)
@@ -658,11 +659,11 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.ProteseSilicone, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @*<div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.ProteseSilicone)
-                                            @Html.ValidationMessageFor(model => model.ProteseSilicone, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.ProteseSilicone)
+                                    @Html.ValidationMessageFor(model => model.ProteseSilicone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                                 <div class="col-md-10">
                                     <label class="switch">
                                         @if (Model.ProteseSilicone)
@@ -719,11 +720,11 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.AnimalEstimacao, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @*<div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.AnimalEstimacao)
-                                            @Html.ValidationMessageFor(model => model.AnimalEstimacao, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.AnimalEstimacao)
+                                    @Html.ValidationMessageFor(model => model.AnimalEstimacao, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                                 <div class="col-md-10">
                                     <label class="switch">
                                         @if (Model.AnimalEstimacao)

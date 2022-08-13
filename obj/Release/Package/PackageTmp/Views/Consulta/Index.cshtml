@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Consulta</h2>
+<hr />
+
+
+@using (Html.BeginForm("BuscarCliente", "Consulta", FormMethod.Get))
+{
+    <div class="form-inline">
+        <div class="form-group">
+            <input type="text" name="nome" class="form-control" placeholder="Buscar Cliente" />
+        </div>
+        <input type="submit" value="Buscar" class="btn btn-default" />
+    </div>
+}
+
+<br />
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Nome
+        </th>
+        <th>
+            Consulta
+        </th>
+    </tr>
+    @if (ViewBag.Clientes == null)
+    {
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    }
+    else
+    {
+        foreach (var cliente in ViewBag.Clientes)
+        {
+<tr>
+    <td>
+        @cliente.Nome
+    </td>
+    <td>
+        <a href="/Consulta/Create/@cliente.IdCliente" data-toggle="tooltip" data-placement="top" title="Nova Consulta"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:green"></span></a>
+        <a href="/Consulta/Historico/@cliente.IdCliente" data-toggle="tooltip" data-placement="top" title="Ver Histórico"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="color:blue"></span></a>
+    </td>
+</tr>
+        }
+    }
+
+</table>

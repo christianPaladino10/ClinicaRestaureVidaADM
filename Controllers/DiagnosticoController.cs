@@ -17,82 +17,125 @@ namespace AdminRestaureVida.Controllers
         // GET: Diagnostico
         public ActionResult Index()
         {
-            return View();
+            if (Session["Autorizado"] != null)
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         public ActionResult BuscarCliente(string nome)
         {
-            if (!string.IsNullOrEmpty(nome))
+            if (Session["Autorizado"] != null)
             {
-                _clienteRepository = new ClienteRepository();
-                _repository = new DiagnosticoRepository();
-
-                var clientes = _clienteRepository.BuscarPorNome(nome);
-
-                List<ClienteDiagnosticoViewModel> listVM = new List<ClienteDiagnosticoViewModel>();
-
-                foreach (var cliente in clientes)
+                if (!string.IsNullOrEmpty(nome))
                 {
-                    ClienteDiagnosticoViewModel vm = new ClienteDiagnosticoViewModel();
-                    vm.IdCliente = cliente.Id;
-                    vm.Nome = cliente.Nome;
-                    vm.TemDiagnostico = false;
+                    _clienteRepository = new ClienteRepository();
+                    _repository = new DiagnosticoRepository();
 
-                    var diagnostico = _repository.BuscarDiagnostico(cliente.Id);
+                    var clientes = _clienteRepository.BuscarPorNome(nome);
 
-                    if (diagnostico.Id > 0)
-                        vm.TemDiagnostico = true;
+                    List<ClienteDiagnosticoViewModel> listVM = new List<ClienteDiagnosticoViewModel>();
 
-                    listVM.Add(vm);
+                    foreach (var cliente in clientes)
+                    {
+                        ClienteDiagnosticoViewModel vm = new ClienteDiagnosticoViewModel();
+                        vm.IdCliente = cliente.Id;
+                        vm.Nome = cliente.Nome;
+                        vm.TemDiagnostico = false;
+
+                        var diagnostico = _repository.BuscarDiagnostico(cliente.Id);
+
+                        if (diagnostico.Id > 0)
+                            vm.TemDiagnostico = true;
+
+                        listVM.Add(vm);
+                    }
+
+                    ViewBag.Clientes = listVM;
                 }
 
-                ViewBag.Clientes = listVM;
+                return View("Index");
             }
-
-            return View("Index");
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         public ActionResult Create(int clienteId)
         {
-            _clienteRepository = new ClienteRepository();
-            ViewBag.Cliente = _clienteRepository.Buscar(clienteId);
+            if (Session["Autorizado"] != null)
+            {
+                _clienteRepository = new ClienteRepository();
+                ViewBag.Cliente = _clienteRepository.Buscar(clienteId);
 
-            return View();
+                return View();
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         [HttpPost] //POST: Diagnostico
         public ActionResult AdicionarDiagnostico(Diagnostico diagnostico)
         {
-            _repository = new DiagnosticoRepository();
+            if (Session["Autorizado"] != null)
+            {
+                _repository = new DiagnosticoRepository();
+                diagnostico.IdProfissional = Convert.ToInt32(Session["Autorizado"]);
 
-            _repository.Adicionar(diagnostico);
-            return RedirectToAction("Index");
+                _repository.Adicionar(diagnostico);
+
+                TempData["MensagemSucesso"] = "Salvo com sucesso!";
+
+                return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         public ActionResult Details(int clienteId)
         {
-            _repository = new DiagnosticoRepository();
-            var diagnostico = _repository.BuscarDiagnostico(clienteId);
+            if (Session["Autorizado"] != null)
+            {
+                _repository = new DiagnosticoRepository();
+                var diagnostico = _repository.BuscarDiagnostico(clienteId);
 
-            return View(diagnostico);
+                return View(diagnostico);
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         [HttpGet] //GET (pegar)
         public ActionResult Edit(int clienteId)
         {
-            _repository = new DiagnosticoRepository();
-            var diagnostico = _repository.BuscarDiagnostico(clienteId);
+            if (Session["Autorizado"] != null)
+            {
+                _repository = new DiagnosticoRepository();
+                var diagnostico = _repository.BuscarDiagnostico(clienteId);
 
-            return View(diagnostico);
+                return View(diagnostico);
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
         [HttpPost] //POST (enviar)
         public ActionResult EditarDiagnostico(Diagnostico diagnostico)
         {
-            _repository = new DiagnosticoRepository();
-            _repository.Alterar(diagnostico);
+            if (Session["Autorizado"] != null)
+            {
+                diagnostico.IdProfissional = Convert.ToInt32(Session["Autorizado"]);
 
-            return RedirectToAction("Index"); // redireciona para action apontada
+                _repository = new DiagnosticoRepository();
+                _repository.Alterar(diagnostico);
+
+                TempData["MensagemSucesso"] = "Salvo com sucesso!";
+
+                return RedirectToAction("Index"); // redireciona para action apontada
+            }
+            else
+                return RedirectToAction("Index", "Login");
         }
 
     }

@@ -124,24 +124,24 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.HorarioCafe, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.HorarioCafe, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                    @Html.EditorFor(model => model.HorarioCafe, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
                                 </div>
 
                                 @Html.LabelFor(model => model.HorarioAlmoco, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.HorarioAlmoco, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                    @Html.EditorFor(model => model.HorarioAlmoco, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.HorarioCafeTarde, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.HorarioCafeTarde, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                    @Html.EditorFor(model => model.HorarioCafeTarde, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
                                 </div>
 
                                 @Html.LabelFor(model => model.HorarioJantar, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.HorarioJantar, new { htmlAttributes = new { @class = "form-control", @maxlength = "5" } })
+                                    @Html.EditorFor(model => model.HorarioJantar, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
                                 </div>
                             </div>
                         </div>
@@ -698,7 +698,7 @@
 
             <div class="form-group row">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
                 </div>
             </div>
 
@@ -707,7 +707,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="/Diagnostico/Index"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;Voltar</a>
 </div>
 
 @section Scripts {

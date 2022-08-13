@@ -72,8 +72,8 @@ C:\Users\chris\source\repos\AdminRestaureVida\bin\System.Web.WebPages.Razor.xml
 C:\Users\chris\source\repos\AdminRestaureVida\bin\Newtonsoft.Json.xml
 C:\Users\chris\source\repos\AdminRestaureVida\bin\Antlr3.Runtime.pdb
 C:\Users\chris\source\repos\AdminRestaureVida\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\chris\source\repos\AdminRestaureVida\obj\Debug\AdminRestaureVida.csprojAssemblyReference.cache
 C:\Users\chris\source\repos\AdminRestaureVida\obj\Debug\AdminRestaureVida.csproj.CoreCompileInputs.cache
 C:\Users\chris\source\repos\AdminRestaureVida\obj\Debug\AdminRestaureVida.csproj.CopyComplete
 C:\Users\chris\source\repos\AdminRestaureVida\obj\Debug\AdminRestaureVida.dll
 C:\Users\chris\source\repos\AdminRestaureVida\obj\Debug\AdminRestaureVida.pdb
+C:\Users\chris\source\repos\AdminRestaureVida\obj\Debug\AdminRestaureVida.csprojAssemblyReference.cache
