@@ -112,6 +112,7 @@
                         <option>Divorciado</option>
                         <option>Viúvo</option>
                     </select>
+
                 </div>
 
                 @Html.LabelFor(model => model.Profissao, htmlAttributes: new { @class = "control-label col-md-1" })
@@ -123,9 +124,21 @@
 
             <div class="form-group row">
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-1" })
-                <div class="col-md-6">
+                <div class="col-md-5">
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.Elemento, htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-5">
+                    <select class="form-control" id="Elemento" name="Elemento">
+                        <option>Selecione</option>
+                        <option>Fogo</option>
+                        <option>Água</option>
+                        <option>Metal</option>
+                        <option>Terra</option>
+                        <option>Madeira</option>
+                    </select>
                 </div>
             </div>
 
@@ -380,6 +393,10 @@
     $('#CEP').mask("####-###", { reverse: true });
 
     $(document).ready(function () {
+
+        $("#EstadoCivil").val("@Model.EstadoCivil");
+        $("#Elemento").val("@Model.Elemento");
+
 
         function limpa_formulário_cep() {
             // Limpa valores do formulário de cep.

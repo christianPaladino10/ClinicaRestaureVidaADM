@@ -150,6 +150,8 @@
     <Compile Include="Repository\ProfissionalSegmentoRepository.cs" />
     <Compile Include="Repository\SegmentoRepository.cs" />
     <Compile Include="ViewModel\ClienteDiagnosticoViewModel.cs" />
+    <Compile Include="ViewModel\ClienteViewModel.cs" />
+    <Compile Include="ViewModel\ConsultaHistoricoViewModel.cs" />
     <Compile Include="ViewModel\ConsultaViewModel.cs" />
     <Compile Include="ViewModel\ProfissionalSegmentoViewModel.cs" />
     <Compile Include="ViewModel\SegmentoViewModel.cs" />

@@ -168,7 +168,7 @@ namespace AdminRestaureVida.Controllers
                 return RedirectToAction("Index", "Login");
         }
 
-        public ActionResult Historico()
+        public ActionResult Historico(int page = 1)
         {
             if (Session["Autorizado"] != null)
             {
@@ -177,7 +177,14 @@ namespace AdminRestaureVida.Controllers
                 var idCliente = Url.RequestContext.RouteData.Values["id"];
                 var listaConsulta = _repository.GetConsultasPorCliente(Convert.ToInt32(idCliente));
 
-                return View(listaConsulta);
+                var vm = new ConsultaHistoricoViewModel
+                {
+                    ConsultaPerPage = 10,
+                    Consultas = listaConsulta,
+                    CurrentPage = page
+                };
+
+                return View(vm);
             }
             else
                 return RedirectToAction("Index", "Login");

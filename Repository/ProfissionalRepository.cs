@@ -188,6 +188,33 @@ namespace AdminRestaureVida.Repository
             return profissional;
         }
 
+        public Profissional BuscarPorId(int id)
+        {
+            ConectarSql();
+
+            string comando = "SELECT * FROM Profissional WHERE Id = @Id";
+            SqlCommand cmd = new SqlCommand(comando, conn);
+
+            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            Profissional profissional = new Profissional();
+
+            while (reader.Read())
+            {
+                profissional.Id = Convert.ToInt32(reader["Id"]);
+                profissional.Nome = Convert.ToString(reader["Nome"]);
+                profissional.DataNascimento = reader["DataNascimento"] != DBNull.Value ? Convert.ToDateTime(reader["DataNascimento"]) : DateTime.MinValue;
+                profissional.CPF = Convert.ToString(reader["CPF"]);
+                profissional.Celular = Convert.ToString(reader["Celular"]);
+                profissional.Telefone = Convert.ToString(reader["Telefone"]);
+                profissional.DataCadastro = reader["DataCadastro"] != DBNull.Value ? Convert.ToDateTime(reader["DataCadastro"]) : DateTime.MinValue;
+            }
+
+            return profissional;
+        }
+
         public Profissional Login(Profissional profissional)
         {
             ConectarSql();

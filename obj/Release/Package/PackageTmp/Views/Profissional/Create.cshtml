@@ -1,4 +1,4 @@
-﻿@model AdminRestaureVida.Models.Profissional
+﻿@model AdminRestaureVida.ViewModel.ProfissionalSegmentoViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -82,23 +82,35 @@
             </div>
 
             <div class="form-group row">
-                <label class="control-label col-md-1">Segmento</label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.SegmentoId, (SelectList)ViewBag.Segmentos, "Select Segmento", new { @class = "form-control" })
+                <div class="panel panel-default">
+                    <div class="panel-heading">Escolha os Segmentos em que o Profissional irá atuar</div>
+                    <div class="panel-body">
+                        @for (int i = 0; i < Model.ListaCheckBoxSegmento.Count; i++)
+                        {
+                            <label>
+                                @Html.HiddenFor(m => Model.ListaCheckBoxSegmento[i].Id)
+                                @Html.HiddenFor(m => Model.ListaCheckBoxSegmento[i].Description)
+                                @Model.ListaCheckBoxSegmento[i].Description
+                                @Html.CheckBoxFor(m => Model.ListaCheckBoxSegmento[i].Checked, new { @value = "True" })
+                            </label>
+                            <br />
+                        }
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <div class="col-md-offset-1 col-md-10">
-                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                <div class="form-group row">
+                    <div class="col-md-10">
+                        <input type="submit" value="Salvar" class="btn btn-primary" />
+                    </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
     </form>
 }
 
-<a href="/Profissional/Index"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;Voltar</a>
+<div class="form-group row">
+    <a href="/Profissional/Index"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;Voltar</a>
+</div>
 
 <script>
     //CPF

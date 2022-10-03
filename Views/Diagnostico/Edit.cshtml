@@ -10,7 +10,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <h4>Diagnóstico</h4>
+    <h4>Diagnóstico @ViewBag.Cliente</h4>
     <hr />
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -20,6 +20,13 @@
         <div class="col-md-12">
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.IdCliente)
+
+            <div class="form-group row">
+                <label class="col-sm-2 control-label">Profissional</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly value="@ViewBag.Profissional">
+                </div>
+            </div>
 
             <div class="form-group row">
                 @Html.LabelFor(model => model.Respiratorio, htmlAttributes: new { @class = "control-label col-md-2" })

@@ -22,8 +22,8 @@ namespace AdminRestaureVida.Repository
         {
             ConectarSql();
 
-            string comando = "INSERT INTO Cliente (Nome,DataNascimento,RG,Idade,CPF,Altura,Peso,Celular,Telefone,EstadoCivil,Profissao,Email,NomeConjuge,NomePai,NomeMae,DataNascimentoMae,DataNascimentoPai,Endereco,Bairro,Cidade,CEP,Estado,Numero,Complemento, DataCadastro)" +
-                                   "VALUES(@Nome,@DataNascimento,@RG,@Idade,@CPF,@Altura,@Peso,@Celular,@Telefone,@EstadoCivil,@Profissao,@Email,@NomeConjuge,@NomePai,@NomeMae,@DataNascimentoMae,@DataNascimentoPai,@Endereco,@Bairro,@Cidade,@CEP,@Estado,@Numero,@Complemento, @DataCadastro)";
+            string comando = "INSERT INTO Cliente (Nome,DataNascimento,RG,Idade,CPF,Altura,Peso,Celular,Telefone,EstadoCivil,Profissao,Email, Elemento, NomeConjuge,NomePai,NomeMae,DataNascimentoMae,DataNascimentoPai,Endereco,Bairro,Cidade,CEP,Estado,Numero,Complemento, DataCadastro)" +
+                                   "VALUES(@Nome,@DataNascimento,@RG,@Idade,@CPF,@Altura,@Peso,@Celular,@Telefone,@EstadoCivil,@Profissao,@Email, @Elemento, @NomeConjuge,@NomePai,@NomeMae,@DataNascimentoMae,@DataNascimentoPai,@Endereco,@Bairro,@Cidade,@CEP,@Estado,@Numero,@Complemento, @DataCadastro)";
 
             SqlCommand cmd = new SqlCommand(comando, conn);
 
@@ -86,6 +86,11 @@ namespace AdminRestaureVida.Repository
                 cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = DBNull.Value;
             else
                 cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = cliente.Email;
+
+            if (cliente.Elemento == null)
+                cmd.Parameters.Add("@Elemento", SqlDbType.VarChar).Value = DBNull.Value;
+            else
+                cmd.Parameters.Add("@Elemento", SqlDbType.VarChar).Value = cliente.Elemento;
 
             if (cliente.NomeConjuge == null)
                 cmd.Parameters.Add("@NomeConjuge", SqlDbType.VarChar).Value = DBNull.Value;
@@ -234,6 +239,7 @@ namespace AdminRestaureVida.Repository
                 cliente.EstadoCivil = Convert.ToString(reader["EstadoCivil"]);
                 cliente.Profissao = Convert.ToString(reader["Profissao"]);
                 cliente.Email = Convert.ToString(reader["Email"]);
+                cliente.Elemento = Convert.ToString(reader["Elemento"]);
                 cliente.NomeConjuge = Convert.ToString(reader["NomeConjuge"]);
                 cliente.NomePai = Convert.ToString(reader["NomePai"]);
                 cliente.NomeMae = Convert.ToString(reader["NomeMae"]);
@@ -279,6 +285,7 @@ namespace AdminRestaureVida.Repository
                 cliente.EstadoCivil = Convert.ToString(reader["EstadoCivil"]);
                 cliente.Profissao = Convert.ToString(reader["Profissao"]);
                 cliente.Email = Convert.ToString(reader["Email"]);
+                cliente.Elemento = Convert.ToString(reader["Elemento"]);
                 cliente.NomeConjuge = Convert.ToString(reader["NomeConjuge"]);
                 cliente.NomePai = Convert.ToString(reader["NomePai"]);
                 cliente.NomeMae = Convert.ToString(reader["NomeMae"]);
@@ -303,7 +310,7 @@ namespace AdminRestaureVida.Repository
         {
             ConectarSql();
 
-            string comando = "UPDATE Cliente SET  Nome = @Nome, DataNascimento = @DataNascimento, RG = @RG, Idade = @Idade, CPF = @CPF, Altura = @Altura, Peso = @Peso, Celular = @Celular, Telefone = @Telefone, EstadoCivil = @EstadoCivil, Profissao = @Profissao, Email = @Email, NomeConjuge = @NomeConjuge, NomePai = @NomePai, NomeMae = @NomeMae, DataNascimentoMae = @DataNascimentoMae, DataNascimentoPai = @DataNascimentoPai, Endereco = @Endereco, Bairro = @Bairro, Cidade = @Cidade, CEP = @CEP, Estado = @Estado, Numero = @Numero, Complemento = @Complemento " +
+            string comando = "UPDATE Cliente SET  Nome = @Nome, DataNascimento = @DataNascimento, RG = @RG, Idade = @Idade, CPF = @CPF, Altura = @Altura, Peso = @Peso, Celular = @Celular, Telefone = @Telefone, EstadoCivil = @EstadoCivil, Profissao = @Profissao, Email = @Email, Elemento = @Elemento, NomeConjuge = @NomeConjuge, NomePai = @NomePai, NomeMae = @NomeMae, DataNascimentoMae = @DataNascimentoMae, DataNascimentoPai = @DataNascimentoPai, Endereco = @Endereco, Bairro = @Bairro, Cidade = @Cidade, CEP = @CEP, Estado = @Estado, Numero = @Numero, Complemento = @Complemento " +
                                 "WHERE Id = @Id";
 
             SqlCommand cmd = new SqlCommand(comando, conn);
@@ -369,6 +376,11 @@ namespace AdminRestaureVida.Repository
                 cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = DBNull.Value;
             else
                 cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = cliente.Email;
+
+            if (cliente.Elemento == null)
+                cmd.Parameters.Add("@Elemento", SqlDbType.VarChar).Value = DBNull.Value;
+            else
+                cmd.Parameters.Add("@Elemento", SqlDbType.VarChar).Value = cliente.Elemento;
 
             if (cliente.NomeConjuge == null)
                 cmd.Parameters.Add("@NomeConjuge", SqlDbType.VarChar).Value = DBNull.Value;

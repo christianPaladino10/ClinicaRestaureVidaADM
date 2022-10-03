@@ -23,7 +23,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataNascimento)
+            @{
+                string parameterValue = Model.DataNascimento.Value.ToShortDateString();
+                if (parameterValue == "01/01/0001")
+                {
+                    parameterValue = string.Empty;
+                }
+            }
+            @Html.DisplayFor(model => parameterValue)
         </dd>
 
         <dt>
@@ -87,7 +94,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EstadoCivil)
+            @{
+                string civil = Model.EstadoCivil.ToString();
+                if (civil == "Selecione")
+                {
+                    civil = string.Empty;
+                }
+            }
+            @Html.DisplayFor(model => civil)
         </dd>
 
         <dt>
@@ -104,6 +118,21 @@
 
         <dd>
             @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Elemento)
+        </dt>
+
+        <dd>
+            @{
+                string elemento = Model.Elemento.ToString();
+                if (elemento == "Selecione")
+                {
+                    elemento = string.Empty;
+                }
+            }
+            @Html.DisplayFor(model => elemento)
         </dd>
 
         <dt>
@@ -135,7 +164,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataNascimentoMae)
+            @{
+                string dtMae = Model.DataNascimentoMae.Value.ToShortDateString();
+                if (dtMae == "01/01/0001")
+                {
+                    dtMae = string.Empty;
+                }
+            }
+            @Html.DisplayFor(modelItem => dtMae)
         </dd>
 
         <dt>
@@ -143,7 +179,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataNascimentoPai)
+            @{
+                string dtPai = Model.DataNascimentoPai.Value.ToShortDateString();
+                if (dtPai == "01/01/0001")
+                {
+                    dtPai = string.Empty;
+                }
+            }
+            @Html.DisplayFor(modelItem => dtPai)
         </dd>
 
         <dt>

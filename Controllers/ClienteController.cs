@@ -1,5 +1,6 @@
 ﻿using AdminRestaureVida.Models;
 using AdminRestaureVida.Repository;
+using AdminRestaureVida.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,22 @@ namespace AdminRestaureVida.Controllers
 
         // GET: Cliente
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
             if (Session["Autorizado"] != null)
             {
                 _repository = new ClienteRepository();
 
                 var clientes = _repository.BuscarTodos();
-                return View(clientes);
+
+                var vm = new ClienteViewModel
+                {
+                    ClientePerPage = 10,
+                    Clientes = clientes,
+                    CurrentPage = page
+                };
+
+                return View(vm);
             }
             else
                 return RedirectToAction("Index", "Login");
@@ -49,7 +58,6 @@ namespace AdminRestaureVida.Controllers
 
                 _repository.Adicionar(cliente);
 
-                //ViewBag.Mensagem = "Cadastro Efetuado com Sucesso!";
                 TempData["MensagemSucesso"] = "Salvo com sucesso!";
 
                 return RedirectToAction("Index");
@@ -132,5 +140,27 @@ namespace AdminRestaureVida.Controllers
                 return RedirectToAction("Index", "Login");
         }
 
+        public ActionResult BuscarCliente(string nome, int page = 1)
+        {
+            if (Session["Autorizado"] != null)
+            {
+                ClienteViewModel vm = new ClienteViewModel();
+
+                if (!string.IsNullOrEmpty(nome))
+                {
+                    _repository = new ClienteRepository();
+                    var clientes = _repository.BuscarPorNome(nome);
+
+                    vm.ClientePerPage = 10;
+                    vm.Clientes = clientes;
+                    vm.CurrentPage = page;
+                }
+
+                return View("Index", vm);
+            }
+            else
+                return RedirectToAction("Index", "Login");
+
+        }
     }
 }

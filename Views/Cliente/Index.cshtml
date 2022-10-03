@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AdminRestaureVida.Models.Cliente>
+﻿@model AdminRestaureVida.ViewModel.ClienteViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -9,6 +9,20 @@
 <p>
     @Html.ActionLink("Cadastrar Novo Cliente", "Create")
 </p>
+
+<hr />
+
+@using (Html.BeginForm("BuscarCliente", "Cliente", FormMethod.Get))
+{
+    <div class="form-inline">
+        <div class="form-group">
+            <input type="text" name="nome" class="form-control" placeholder="Buscar Cliente" />
+        </div>
+        <input type="submit" value="Buscar" class="btn btn-default" />
+    </div>
+}
+
+<br />
 
 <table class="table table-bordered">
     <tr>
@@ -36,7 +50,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.PaginatedClientes())
     {
         <tr>
             <td>
@@ -45,6 +59,10 @@
             <td>
                 @{
                     string parameterValue = item.DataNascimento.Value.ToShortDateString();
+                    if (parameterValue == "01/01/0001")
+                    {
+                        parameterValue = string.Empty;
+                    }
                 }
                 @Html.DisplayFor(modelItem => parameterValue)
             </td>
@@ -99,6 +117,18 @@
 
 </table>
 
+<ul class="pagination">
+    @for (int i = 1; i <= Model.PageCount(); i++)
+    {
+        <li class="@(i == Model.CurrentPage ? "page-item active" : "page-item")">
+            <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+        </li>
+    }
+</ul>
+
+<br />
+
+<a href="/Cliente/Index"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;Voltar</a>
 
 @{
     var message = TempData["MensagemSucesso"] ?? string.Empty;

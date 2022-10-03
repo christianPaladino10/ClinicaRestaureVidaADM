@@ -13,6 +13,7 @@ namespace AdminRestaureVida.Controllers
     {
         private ClienteRepository _clienteRepository;
         private DiagnosticoRepository _repository;
+        private ProfissionalRepository _profissionaRepository;
 
         // GET: Diagnostico
         public ActionResult Index()
@@ -113,6 +114,14 @@ namespace AdminRestaureVida.Controllers
             {
                 _repository = new DiagnosticoRepository();
                 var diagnostico = _repository.BuscarDiagnostico(clienteId);
+
+                _profissionaRepository = new ProfissionalRepository();
+                var profissional = _profissionaRepository.BuscarPorId(diagnostico.IdProfissional);
+                ViewBag.Profissional = profissional.Nome;
+
+                _clienteRepository = new ClienteRepository();
+                var cliente = _clienteRepository.Buscar(diagnostico.IdCliente);
+                ViewBag.Cliente = cliente.Nome;
 
                 return View(diagnostico);
             }

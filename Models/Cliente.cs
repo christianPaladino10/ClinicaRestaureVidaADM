@@ -27,6 +27,9 @@ namespace AdminRestaureVida.Models
         public string Profissao { get; set; }
         public string Email { get; set; }
 
+        [DisplayName("Elemento")]
+        public string Elemento { get; set; }
+
         [DisplayName("Nome Conjuge")]
         public string NomeConjuge { get; set; }
 

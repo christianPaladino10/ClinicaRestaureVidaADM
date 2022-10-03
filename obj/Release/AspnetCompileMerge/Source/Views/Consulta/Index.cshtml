@@ -39,16 +39,40 @@
     {
         foreach (var cliente in ViewBag.Clientes)
         {
-<tr>
-    <td>
-        @cliente.Nome
-    </td>
-    <td>
-        <a href="/Consulta/Create/@cliente.IdCliente" data-toggle="tooltip" data-placement="top" title="Nova Consulta"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:green"></span></a>
-        <a href="/Consulta/Historico/@cliente.IdCliente" data-toggle="tooltip" data-placement="top" title="Ver Histórico"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="color:blue"></span></a>
-    </td>
-</tr>
+            <tr>
+                <td>
+                    @cliente.Nome
+                </td>
+                <td>
+                    <a href="/Consulta/Create/@cliente.IdCliente" data-toggle="tooltip" data-placement="top" title="Nova Consulta"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:green"></span></a>
+                    <a href="/Consulta/Historico/@cliente.IdCliente" data-toggle="tooltip" data-placement="top" title="Ver Histórico"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="color:blue"></span></a>
+                </td>
+            </tr>
         }
     }
 
 </table>
+
+@{
+    var message = TempData["MensagemSucesso"] ?? string.Empty;
+}
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cadastro</h4>
+            </div>
+            <div class="modal-body">
+                <p>@message</p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+    var message = '@message';
+    if(message)
+        $('#myModal').modal('show')
+</script>

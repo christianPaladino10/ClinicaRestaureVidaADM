@@ -47,7 +47,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataNascimento)
+            @{
+                string parameterValue = Model.DataNascimento.Value.ToShortDateString();
+                if (parameterValue == "01/01/0001")
+                {
+                    parameterValue = string.Empty;
+                }
+            }
+            @Html.DisplayFor(model => parameterValue)
         </dd>
 
         <dt>
@@ -59,11 +66,14 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SegmentoId)
+            Segmentos
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SegmentoId)
+            @foreach (var segmento in ViewBag.Segmentos)
+            {
+                @segmento <br />
+            }
         </dd>
 
     </dl>
