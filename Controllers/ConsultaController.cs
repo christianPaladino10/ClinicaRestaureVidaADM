@@ -173,9 +173,17 @@ namespace AdminRestaureVida.Controllers
             if (Session["Autorizado"] != null)
             {
                 _repository = new ConsultaRepository();
+                _profissionalRepository = new ProfissionalRepository();
+                List<Consulta> listaConsulta = new List<Consulta>();
 
                 var idCliente = Url.RequestContext.RouteData.Values["id"];
-                var listaConsulta = _repository.GetConsultasPorCliente(Convert.ToInt32(idCliente));
+
+                var profissional = _profissionalRepository.Buscar(Convert.ToInt32(Session["Autorizado"]));
+
+                if (profissional.Perfil == "Administrador")
+                    listaConsulta = _repository.GetConsultasPorClienteADM(Convert.ToInt32(idCliente));
+                else
+                    listaConsulta = _repository.GetConsultasPorCliente(Convert.ToInt32(idCliente), Convert.ToInt32(profissional.Id));
 
                 var vm = new ConsultaHistoricoViewModel
                 {

@@ -22,7 +22,7 @@ namespace AdminRestaureVida.ViewModel
         public IEnumerable<Consulta> PaginatedConsultas()
         {
             int start = (CurrentPage - 1) * ConsultaPerPage;
-            return Consultas.OrderBy(b => b.Id).Skip(start).Take(ConsultaPerPage);
+            return Consultas.OrderByDescending(b => b.DataCriacao).Skip(start).Take(ConsultaPerPage);
         }
     }
 }

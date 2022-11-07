@@ -50,7 +50,38 @@ namespace AdminRestaureVida.Repository
             }
         }
 
-        internal List<Consulta> GetConsultasPorCliente(int idCliente)
+        internal List<Consulta> GetConsultasPorCliente(int idCliente, int idProfissional)
+        {
+            ConectarSql();
+
+            string comando = "SELECT * FROM Consulta WHERE ClienteId = @ClienteId AND Deletado = 0 AND ProfissionalId = @idProfissional";
+            SqlCommand cmd = new SqlCommand(comando, conn);
+
+            cmd.Parameters.Add("@ClienteId", SqlDbType.Int).Value = idCliente;
+            cmd.Parameters.Add("@idProfissional", SqlDbType.Int).Value = idProfissional;
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Consulta> listaConsulta = new List<Consulta>();
+
+            while (reader.Read())
+            {
+                Consulta consulta = new Consulta();
+
+                consulta.Id = Convert.ToInt32(reader["Id"]);
+                consulta.DataCriacao = Convert.ToDateTime(reader["DataCriacao"]);
+                consulta.DataAtualizacao = reader["DataAtualizacao"] != DBNull.Value ? Convert.ToDateTime(reader["DataAtualizacao"]) : DateTime.MinValue;
+                consulta.Observacao = Convert.ToString(reader["Observacao"]);
+                consulta.IdCliente = Convert.ToInt32(reader["ClienteId"]);
+                consulta.ProfissionalId = Convert.ToInt32(reader["ProfissionalId"]);
+
+                listaConsulta.Add(consulta);
+            };
+
+            return listaConsulta;
+        }
+
+        internal List<Consulta> GetConsultasPorClienteADM(int idCliente)
         {
             ConectarSql();
 

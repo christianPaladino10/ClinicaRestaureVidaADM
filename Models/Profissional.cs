@@ -23,5 +23,8 @@ namespace AdminRestaureVida.Models
         public string Email { get; set; }
         public string Senha { get; set; }
 
+        public bool Deletado { get; set; }
+        public string Perfil { get; set; }
+
     }
 }

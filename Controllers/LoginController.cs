@@ -34,6 +34,8 @@ namespace AdminRestaureVida.Controllers
             if (login.Id != 0)
             {
                 Session["Autorizado"] = login.Id;
+                Session["Perfil"] = login.Perfil;
+
                 //    new Profissional() 
                 //{
                 //    Id = login.Id,

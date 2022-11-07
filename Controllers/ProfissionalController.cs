@@ -88,7 +88,8 @@ namespace AdminRestaureVida.Controllers
                     Email = profissionalVM.Email,
                     Nome = profissionalVM.Nome,
                     Senha = profissionalVM.Senha,
-                    Telefone = profissionalVM.Telefone
+                    Telefone = profissionalVM.Telefone,
+                    Perfil = profissionalVM.Perfil
                 };
 
                 int idProfissional = _repository.Adicionar(profissional);
@@ -135,6 +136,7 @@ namespace AdminRestaureVida.Controllers
                 vm.Email = profissionalEscolhido.Email;
                 vm.Nome = profissionalEscolhido.Nome;
                 vm.Telefone = profissionalEscolhido.Telefone;
+                vm.Perfil = profissionalEscolhido.Perfil;
 
                 var segmentos = _repositorySegmento.BuscarTodos();
                 var listaProfissionalSegmento = _repositoryProfissionalSegmento.Buscar(id);
@@ -180,7 +182,8 @@ namespace AdminRestaureVida.Controllers
                     CPF = profissionalVM.CPF,
                     DataNascimento = profissionalVM.DataNascimento,
                     Nome = profissionalVM.Nome,
-                    Telefone = profissionalVM.Telefone
+                    Telefone = profissionalVM.Telefone,
+                    Perfil = profissionalVM.Perfil
                 };
 
                 _repository.Alterar(profissional);

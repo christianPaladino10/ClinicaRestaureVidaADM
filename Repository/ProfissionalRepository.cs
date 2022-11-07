@@ -45,7 +45,7 @@ namespace AdminRestaureVida.Repository
         {
             ConectarSql();
 
-            string comando = "INSERT INTO Profissional (Nome, DataNascimento, CPF, Celular, Telefone, DataCadastro, Email, Senha) VALUES(@Nome, @DataNascimento, @CPF, @Celular, @Telefone, @DataCadastro, @Email, @Senha);SELECT SCOPE_IDENTITY();";
+            string comando = "INSERT INTO Profissional (Nome, DataNascimento, CPF, Celular, Telefone, DataCadastro, Email, Senha, Deletado, Perfil) VALUES(@Nome, @DataNascimento, @CPF, @Celular, @Telefone, @DataCadastro, @Email, @Senha, @Deletado, @Perfil);SELECT SCOPE_IDENTITY();";
 
             SqlCommand cmd = new SqlCommand(comando, conn);
 
@@ -86,6 +86,13 @@ namespace AdminRestaureVida.Repository
             else
                 cmd.Parameters.Add("@Senha", SqlDbType.VarChar).Value = profissional.Senha;
 
+            cmd.Parameters.Add("@Deletado", SqlDbType.Bit).Value = 0;
+
+            if (profissional.Perfil == null)
+                cmd.Parameters.Add("@Perfil", SqlDbType.VarChar).Value = DBNull.Value;
+            else
+                cmd.Parameters.Add("@Perfil", SqlDbType.VarChar).Value = profissional.Perfil;
+
             try
             {
                 int idProfissional = Convert.ToInt32(cmd.ExecuteScalar());
@@ -101,7 +108,7 @@ namespace AdminRestaureVida.Repository
         {
             ConectarSql();
 
-            string comando = "UPDATE Profissional SET  Nome = @Nome, DataNascimento = @DataNascimento, CPF = @CPF, Celular = @Celular, Telefone = @Telefone " +
+            string comando = "UPDATE Profissional SET  Nome = @Nome, DataNascimento = @DataNascimento, CPF = @CPF, Celular = @Celular, Telefone = @Telefone, Perfil = @Perfil " +
                                 "WHERE Id = @Id";
 
             SqlCommand cmd = new SqlCommand(comando, conn);
@@ -132,6 +139,11 @@ namespace AdminRestaureVida.Repository
                 cmd.Parameters.Add("@Telefone", SqlDbType.VarChar).Value = DBNull.Value;
             else
                 cmd.Parameters.Add("@Telefone", SqlDbType.VarChar).Value = profissional.Telefone;
+
+            if (profissional.Perfil == null)
+                cmd.Parameters.Add("@Perfil", SqlDbType.VarChar).Value = DBNull.Value;
+            else
+                cmd.Parameters.Add("@Perfil", SqlDbType.VarChar).Value = profissional.Perfil;
 
             try
             {
@@ -183,6 +195,7 @@ namespace AdminRestaureVida.Repository
                 profissional.Celular = Convert.ToString(reader["Celular"]);
                 profissional.Telefone = Convert.ToString(reader["Telefone"]);
                 profissional.DataCadastro = reader["DataCadastro"] != DBNull.Value ? Convert.ToDateTime(reader["DataCadastro"]) : DateTime.MinValue;
+                profissional.Perfil = Convert.ToString(reader["Perfil"]);
             }
 
             return profissional;
@@ -235,6 +248,7 @@ namespace AdminRestaureVida.Repository
                 profissional.CPF = Convert.ToString(reader["CPF"]);
                 profissional.Celular = Convert.ToString(reader["Celular"]);
                 profissional.Telefone = Convert.ToString(reader["Telefone"]);
+                profissional.Perfil = Convert.ToString(reader["Perfil"]);
             }
 
             return profissional;
