@@ -32,8 +32,13 @@
                         @*Link / Action / Controller *@
                         <li>@Html.ActionLink("Cliente", "Index", "Cliente")</li>
                         <li>@Html.ActionLink("Técnicas", "Index", "Procedimento")</li>
-                        <li>@Html.ActionLink("Diagnóstico", "Index", "Diagnostico")</li>
-                        <li>@Html.ActionLink("Profissionais", "Index", "Profissional")</li>
+
+                        @if (Session["Perfil"].ToString() == "Administrador")
+                        {
+                            <li>@Html.ActionLink("Diagnóstico", "Index", "Diagnostico")</li>
+                            <li>@Html.ActionLink("Profissionais", "Index", "Profissional")</li>
+                        }
+
                         <li>@Html.ActionLink("Segmento", "Index", "Segmento")</li>
                         <li>@Html.ActionLink("Consulta", "Index", "Consulta")</li>
                         <li>@Html.ActionLink("Sair", "Sair", "Login")</li>
